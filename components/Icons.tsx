@@ -1,24 +1,22 @@
-import {
-  IconProps as Tabler_IconProps,
-  IconPlus as Tabler_IconPlus,
-  IconCancel as Tabler_IconCancel,
-  IconCheck as Tabler_IconCheck,
-} from '@tabler/icons-react-native'
+import TablerIcons from '@tabler/icons-react-native'
+import React from 'react'
 
-const color = 'white'
-export type IconsProps = Tabler_IconProps
+const UpdateIcon = (
+  IconComponent: React.ComponentType<TablerIcons.IconProps>,
+) => {
+  return (props: TablerIcons.IconProps) => (
+    <IconComponent {...props} color='white' />
+  )
+}
 
-export const PlusIcon = (props: IconsProps) => <Tabler_IconPlus color={color} />
+export type Icon = (props: TablerIcons.IconProps) => React.ReactNode
+export type IconProps = TablerIcons.IconProps
 
-export const CrossIcon = (props: IconsProps) => (
-  <Tabler_IconCancel color={color} />
-)
+export const PlusIcon = UpdateIcon(TablerIcons.IconPlus)
+// export const CrossIcon = UpdateIcon(TablerIcons.IconX)
+// export const CancelIcon = CrossIcon
+// export const WrongIcon = CrossIcon
+// export const CheckIcon = UpdateIcon(TablerIcons.IconCheck)
+// export const CorrectIcon = CheckIcon
 
-export const CancelIcon = CrossIcon
-export const WrongIcon = CrossIcon
-
-export const CheckIcon = (props: IconsProps) => (
-  <Tabler_IconCheck color={color} />
-)
-
-export const CorrectIcon = CheckIcon
+// export { IconPlus as PlusIcon } from '@tabler/icons-react-native'

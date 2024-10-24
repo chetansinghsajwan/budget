@@ -1,10 +1,10 @@
-import {
-  Button as Rnui_Button,
-  ButtonProps as Rnui_ButtonProps,
-} from 'react-native-ui-lib'
+import ReactNative from 'react-native'
+import { Icon } from '@components/Icons'
 
-export type ButtonProps = Rnui_ButtonProps
+export type ButtonProps = ReactNative.ButtonProps & {
+  icon?: Icon
+}
 
 export const Button = (props: ButtonProps) => {
-  return <Rnui_Button {...props} />
+  return <ReactNative.Button {...props}>{props.icon}</ReactNative.Button>
 }
