@@ -1,4 +1,3 @@
-class BudgetClient {
-}
+class BudgetClient {}
 
 export default BudgetClient

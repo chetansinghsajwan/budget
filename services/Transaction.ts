@@ -1,4 +1,3 @@
-class Transaction {
-}
+class Transaction {}
 
 export default Transaction
