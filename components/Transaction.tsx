@@ -1,5 +1,5 @@
-import { FloatingButton } from "@/components/FloatingButton";
-import { TextField } from "@/components/TextField";
+import { Button } from "@components/Button";
+import { TextField } from "@components/TextField";
 import { CancelIcon, CheckIcon } from "@components/Icons";
 import { RadioButton, RadioGroup } from "react-native-ui-lib";
 import { View } from "react-native-ui-lib";
@@ -25,18 +25,10 @@ export const Transaction = () => {
       </RadioGroup>
 
       {/* Cancel */}
-      <FloatingButton
-        button={{
-          iconSource: (style) => <CancelIcon />,
-        }}
-      />
+      <Button iconSource={(style) => <CancelIcon />} />
 
       {/* Save */}
-      <FloatingButton
-        button={{
-          iconSource: (style) => <CheckIcon />,
-        }}
-      />
+      <Button iconSource={(style) => <CheckIcon />} />
     </View>
   );
 };

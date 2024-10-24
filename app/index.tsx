@@ -1,4 +1,4 @@
-import { FloatingButton } from "@/components/FloatingButton";
+import { FloatingButton } from "@components/FloatingButton";
 import { PlusIcon } from "@components/Icons";
 import { Transaction } from "@components/Transaction";
 import { View } from "react-native";
@@ -17,7 +17,6 @@ export default function HomeScreen() {
     >
       <Transaction />
       <FloatingButton
-        visible={true}
         button={{
           label: "Create",
           iconSource: (style) => <PlusIcon />,

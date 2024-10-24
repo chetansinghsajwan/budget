@@ -7,7 +7,7 @@ export type FloatingButtonProps = Rnui_FloatingButtonProps;
 
 export const FloatingButton = (props: FloatingButtonProps) => {
   const newProps = { ...props };
-  // newProps.visible = newProps.visible ?? true;
+  newProps.visible = newProps.visible ?? true;
 
   return <Rnui_FloatingButton {...newProps} />;
 };
