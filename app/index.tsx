@@ -1,7 +1,7 @@
-import { FloatingButton } from '@components/FloatingButton'
+import { Button } from '@components/Button'
+import { View } from '@components/View'
 import { PlusIcon } from '@components/Icons'
 import { Transaction } from '@components/Transaction'
-import { View } from 'react-native'
 
 export default function HomeScreen() {
   const onCreateButtonPress = (props: any): void => {
@@ -16,14 +16,7 @@ export default function HomeScreen() {
       }}
     >
       <Transaction />
-      <FloatingButton
-        button={{
-          label: 'Create',
-          iconSource: style => <PlusIcon />,
-          size: 'large',
-          onPress: onCreateButtonPress,
-        }}
-      />
+      <Button title='Create' icon={PlusIcon} onPress={onCreateButtonPress} />
     </View>
   )
 }

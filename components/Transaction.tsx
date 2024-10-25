@@ -1,10 +1,12 @@
+import { View } from '@components/View'
 import { Button } from '@components/Button'
 import { TextField } from '@components/TextField'
+import { RadioGroup } from '@components/RadioGroup'
 import { CancelIcon, CheckIcon } from '@components/Icons'
-import { RadioButton, RadioGroup } from 'react-native-ui-lib'
-import { View } from 'react-native-ui-lib'
 
-export const Transaction = () => {
+export interface TransactionProps {}
+
+export const Transaction = (props: TransactionProps) => {
   const onTransactionTypeChange = (value: string) => {
     console.log(`transaction type set to ${value}`)
   }
@@ -16,19 +18,37 @@ export const Transaction = () => {
 
       {/* Transaction type */}
       <RadioGroup
-        id='transaction-type'
-        initialValue='credit'
-        onValueChange={onTransactionTypeChange}
+        key='transaction-type'
+        onPress={onTransactionTypeChange}
+        containerStyle={{
+          flexDirection: 'row',
+        }}
+        radioButtons={[
+          {
+            id: 'credit',
+            label: 'Credit',
+          },
+          {
+            id: 'debit',
+            label: 'Debit',
+          },
+        ]}
+      />
+
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+          backgroundColor: 'red',
+          gap: 15,
+        }}
       >
-        <RadioButton value='credit' label='Credit' />
-        <RadioButton value='debit' label='Debit' />
-      </RadioGroup>
+        {/* Cancel */}
+        <Button title='Cancel' icon={CancelIcon} />
 
-      {/* Cancel */}
-      <Button iconSource={style => <CancelIcon />} />
-
-      {/* Save */}
-      <Button iconSource={style => <CheckIcon />} />
+        {/* Save */}
+        <Button title='Save' icon={CheckIcon} />
+      </View>
     </View>
   )
 }
