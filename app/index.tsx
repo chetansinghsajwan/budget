@@ -1,13 +1,7 @@
-import { Button } from '@components/ui/Button'
 import { View } from '@components/ui/View'
-import { PlusIcon } from '@components/ui/Icons'
-import { Transaction } from '@components/forms/Transaction'
+import { TransactionsPage } from './Transactions'
 
 export default function HomeScreen() {
-  const onCreateButtonPress = (props: any): void => {
-    console.log('create button pressed')
-  }
-
   return (
     <View
       style={{
@@ -15,8 +9,7 @@ export default function HomeScreen() {
         width: '100%',
       }}
     >
-      <Transaction />
-      <Button title='Create' icon={PlusIcon} onPress={onCreateButtonPress} />
+      <TransactionsPage />
     </View>
   )
 }

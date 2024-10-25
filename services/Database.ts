@@ -11,4 +11,8 @@ export class Database {
   removeTransaction = async (id: TransactionId): Promise<boolean> => {
     return this.transactions.delete(id)
   }
+
+  getTransactions = async (): Promise<Transaction[]> => {
+    return Array.from(this.transactions.values())
+  }
 }
