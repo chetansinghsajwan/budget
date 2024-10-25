@@ -16,6 +16,8 @@
     "preset": "jest-expo"
   },
   "dependencies": {
+    "@expo-google-fonts/inter": "^0.2.3",
+    "@expo-google-fonts/poppins": "^0.2.3",
     "@react-navigation/native": "^6.0.2",
     "@tabler/icons-react-native": "^3.20.0",
     "expo": "~51.0.28",

@@ -39,7 +39,6 @@ export const Transaction = (props: TransactionProps) => {
         style={{
           flexDirection: 'row',
           justifyContent: 'flex-end',
-          backgroundColor: 'red',
           gap: 15,
         }}
       >
