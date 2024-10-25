@@ -1,6 +1,6 @@
 import { Pressable, PressableProps } from 'react-native'
-import { Icon } from '@components/Icons'
-import { Text } from '@components/Text'
+import { Icon } from '@components/ui/Icons'
+import { Text } from '@components/ui/Text'
 
 export type ButtonProps = PressableProps & {
   title?: string

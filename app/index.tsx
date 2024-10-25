@@ -1,7 +1,7 @@
-import { Button } from '@components/Button'
-import { View } from '@components/View'
-import { PlusIcon } from '@components/Icons'
-import { Transaction } from '@components/Transaction'
+import { Button } from '@components/ui/Button'
+import { View } from '@components/ui/View'
+import { PlusIcon } from '@components/ui/Icons'
+import { Transaction } from '@components/forms/Transaction'
 
 export default function HomeScreen() {
   const onCreateButtonPress = (props: any): void => {

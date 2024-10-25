@@ -1,8 +1,8 @@
-import { View } from '@components/View'
-import { Button } from '@components/Button'
-import { TextField } from '@components/TextField'
-import { RadioGroup } from '@components/RadioGroup'
-import { CancelIcon, CheckIcon } from '@components/Icons'
+import { View } from '@components/ui/View'
+import { Button } from '@components/ui/Button'
+import { TextField } from '@components/ui/TextField'
+import { RadioGroup } from '@components/ui/RadioGroup'
+import { CancelIcon, CheckIcon } from '@components/ui/Icons'
 
 export interface TransactionProps {}
 
