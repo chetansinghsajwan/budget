@@ -15,21 +15,21 @@ export const TransactionItem = (props: TransactionProps) => {
     <Card
       style={{
         margin: 10,
-        borderWidth: 2,
-        borderRadius: 10,
+        borderRadius: 20,
         borderColor: 'black',
-        padding: 10,
+        backgroundColor: 'lightgrey',
+        padding: 20,
         maxWidth: 400,
       }}
     >
       <View row space-between>
         <Text value={transaction.title} category='h4' />
-        <Text value={transaction.time} format='datetime-24' category='h4' />
+        <Text value={transaction.time} format='datetime' category='h4' />
       </View>
       <View row space-between>
         <View row>
           <Text value={transactionSign} category='h3' />
-          <Text value={transaction.amount} format='currency-inr' category='h3' />
+          <Text value={transaction.amount} format='currency' category='h3' />
         </View>
         <Text value={transaction.category} category='h4' />
       </View>

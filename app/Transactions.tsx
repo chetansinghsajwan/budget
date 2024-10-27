@@ -15,7 +15,7 @@ export const TransactionsPage = () => {
   return (
     <View
       style={{
-        alignItems: 'center',
+        padding: 30,
       }}
     >
       <Text value='Transactions' category='h1' />
