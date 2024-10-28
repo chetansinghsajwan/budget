@@ -1,10 +1,9 @@
 import * as ReactNative from 'react-native'
-import { useFonts } from 'expo-font'
-import { Poppins_400Regular } from '@expo-google-fonts/poppins'
+import { Theme, useTheme } from '@components/Theme'
 
 export type TextValue = string | number | Date
 
-export type TextCategory = 'plain' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+export type TextCategory = 'text' | 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
 
 export type TextFormat = 'none' | 'integer' | 'float' | 'currency' | 'datetime'
 
@@ -24,54 +23,62 @@ export type TextProps = ReactNative.TextProps & {
 }
 
 export const Text = (props: TextProps) => {
+  const theme = useTheme()
   const text = _toString(props)
   const style: ReactNative.StyleProp<TextStyle> = _getTextStyle(
-    props.category ?? 'plain',
+    props.category ?? 'text',
+    theme,
   )
 
-  useFonts({ Poppins_400Regular })
-
-  return (
-    <ReactNative.Text
-      style={{ fontFamily: 'Poppins_400Regular', ...style }}
-      {...props}
-    >
-      {text}
-    </ReactNative.Text>
-  )
+  return <ReactNative.Text style={style} children={text} />
 }
 
 const _getTextStyle = (
   category: TextCategory,
+  theme: Theme,
 ): ReactNative.StyleProp<TextStyle> => {
   switch (category) {
-    case 'plain':
-      return {
-        fontSize: 10,
-      }
     case 'h1':
       return {
-        fontSize: 50,
+        fontFamily: theme.h1FontFamily,
+        fontSize: theme.h1Size,
+        color: theme.h1Color,
       }
     case 'h2':
       return {
-        fontSize: 40,
+        fontFamily: theme.h2FontFamily,
+        fontSize: theme.h2Size,
+        color: theme.h2Color,
       }
     case 'h3':
       return {
-        fontSize: 30,
+        fontFamily: theme.h3FontFamily,
+        fontSize: theme.h3Size,
+        color: theme.h3Color,
       }
     case 'h4':
       return {
-        fontSize: 20,
+        fontFamily: theme.h4FontFamily,
+        fontSize: theme.h4Size,
+        color: theme.h4Color,
       }
     case 'h5':
       return {
-        fontSize: 15,
+        fontFamily: theme.h5FontFamily,
+        fontSize: theme.h5Size,
+        color: theme.h5Color,
       }
     case 'h6':
       return {
-        fontSize: 12,
+        fontFamily: theme.h6FontFamily,
+        fontSize: theme.h6Size,
+        color: theme.h6Color,
+      }
+    case 'text':
+      return {
+        fontFamily: theme.textFontFamily,
+        fontSize: theme.textSize,
+        color: theme.textColor,
       }
     default:
       return {}
@@ -117,17 +124,27 @@ const _formatDatetime = (
 ): string => {
   if (!(value instanceof Date)) return 'format error'
 
-  const seconds = (relativeDatetime.getTime() - value.getTime()) / 1000
-  const minutes = Math.floor(seconds / 60)
-  const hours = Math.floor(seconds / 3600)
-  const days = Math.floor(seconds / 86400)
+  const diffSeconds = (relativeDatetime.getTime() - value.getTime()) / 1000
+  const diffMinutes = Math.floor(diffSeconds / 60)
+  const diffHours = Math.floor(diffSeconds / 3600)
+  const diffDays = Math.floor(diffSeconds / 86400)
 
-  if (seconds < 60) return 'just now'
-  if (minutes < 60) return `${minutes} min ago`
-  if (hours < 24) return `${hours} hr ago`
-  if (days === 1) return `Yesterday ${value.toLocaleTimeString()}`
+  if (diffSeconds < 60) return 'Just now'
+  if (diffMinutes < 60) return `${diffMinutes} min ago`
+  if (diffHours < 24) return `${diffHours} hr ${diffMinutes / 60} ago`
 
-  return value.toLocaleDateString()
+  const hours = value.getHours()
+  const minutes = value.getMinutes()
+  const timeString = `${hours}:${minutes}`
+
+  if (diffDays === 1) return `Yesterday ${timeString}`
+
+  const year = value.getFullYear()
+  const month = value.getMonth()
+  const day = value.getDay()
+  const dateString = `${year}:${month}:${day}`
+
+  return `${dateString} ${timeString}`
 }
 
 const _formatCurrency = (value: TextValue, format: CurrencyFormat): string => {
