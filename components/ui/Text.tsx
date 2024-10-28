@@ -98,6 +98,7 @@ const _toString = (props: TextProps): string => {
 }
 
 const _formatNone = (value: TextValue): string => {
+  value = value ?? ''
   return value.toString()
 }
 
@@ -114,9 +115,19 @@ const _formatDatetime = (
   format: DatetimeFormat,
   relativeDatetime: Date,
 ): string => {
-  if (value instanceof Date === false) return 'format error'
+  if (!(value instanceof Date)) return 'format error'
 
-  return value.toLocaleTimeString()
+  const seconds = (relativeDatetime.getTime() - value.getTime()) / 1000
+  const minutes = Math.floor(seconds / 60)
+  const hours = Math.floor(seconds / 3600)
+  const days = Math.floor(seconds / 86400)
+
+  if (seconds < 60) return 'just now'
+  if (minutes < 60) return `${minutes} min ago`
+  if (hours < 24) return `${hours} hr ago`
+  if (days === 1) return `Yesterday ${value.toLocaleTimeString()}`
+
+  return value.toLocaleDateString()
 }
 
 const _formatCurrency = (value: TextValue, format: CurrencyFormat): string => {

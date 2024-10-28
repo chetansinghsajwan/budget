@@ -3,10 +3,13 @@ import { Button } from '@components/ui/Button'
 import { TextField } from '@components/ui/TextField'
 import { RadioGroup } from '@components/ui/RadioGroup'
 import { CancelIcon, CheckIcon } from '@components/ui/Icons'
+import { Transaction } from '@services/Transaction'
 
-export interface TransactionProps {}
+export interface TransactionLayoutProps {
+  transaction: Transaction
+}
 
-export const Transaction = (props: TransactionProps) => {
+export const TransactionLayout = (props: TransactionLayoutProps) => {
   const onTransactionTypeChange = (value: string) => {
     console.log(`transaction type set to ${value}`)
   }
@@ -16,7 +19,7 @@ export const Transaction = (props: TransactionProps) => {
       {/* Amount */}
       <TextField placeholder='Amount' inputMode='numeric' />
 
-      {/* Transaction type */}
+      {/* TransactionLayout type */}
       <RadioGroup
         key='transaction-type'
         onPress={onTransactionTypeChange}
@@ -43,10 +46,10 @@ export const Transaction = (props: TransactionProps) => {
         }}
       >
         {/* Cancel */}
-        <Button title='Cancel' icon={CancelIcon} />
+        <Button label='Cancel' icon={CancelIcon} />
 
         {/* Save */}
-        <Button title='Save' icon={CheckIcon} />
+        <Button label='Save' icon={CheckIcon} />
       </View>
     </View>
   )

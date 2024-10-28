@@ -3,7 +3,7 @@ import { Icon } from '@components/ui/Icons'
 import { Text } from '@components/ui/Text'
 
 export type ButtonProps = PressableProps & {
-  title?: string
+  label?: string
   icon?: Icon
 }
 
@@ -21,7 +21,7 @@ export const Button = (props: ButtonProps) => {
       }}
       {...props}
     >
-      <Text value={props.title} />
+      <Text value={props.label ?? ''} category='h4' />
     </Pressable>
   )
 }
