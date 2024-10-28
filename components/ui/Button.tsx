@@ -1,10 +1,10 @@
 import { Pressable, PressableProps } from 'react-native'
-import { Icon } from '@components/ui/Icons'
+import { Icon, IconName } from '@components/ui/Icon'
 import { Text } from '@components/ui/Text'
 
 export type ButtonProps = PressableProps & {
   label?: string
-  icon?: Icon
+  icon?: IconName
 }
 
 export const Button = (props: ButtonProps) => {
@@ -18,9 +18,12 @@ export const Button = (props: ButtonProps) => {
         elevation: 3,
         borderWidth: 2,
         borderRadius: 10,
+        flexDirection: 'row',
+        gap: 15,
       }}
       {...props}
     >
+      <Icon name={props.icon} />
       <Text value={props.label ?? ''} category='h4' />
     </Pressable>
   )

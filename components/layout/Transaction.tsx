@@ -2,8 +2,8 @@ import { View } from '@components/ui/View'
 import { Button } from '@components/ui/Button'
 import { TextField } from '@components/ui/TextField'
 import { RadioGroup } from '@components/ui/RadioGroup'
-import { CancelIcon, CheckIcon } from '@components/ui/Icons'
 import { Transaction } from '@services/Transaction'
+import { Icon } from '@components/ui/Icon'
 
 export interface TransactionLayoutProps {
   transaction: Transaction
@@ -46,10 +46,10 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
         }}
       >
         {/* Cancel */}
-        <Button label='Cancel' icon={CancelIcon} />
+        <Button label='Cancel' icon='cross' />
 
         {/* Save */}
-        <Button label='Save' icon={CheckIcon} />
+        <Button label='Save' icon='check' />
       </View>
     </View>
   )
