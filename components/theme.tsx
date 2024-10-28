@@ -4,6 +4,7 @@ import { ColorValue } from 'react-native'
 export interface Theme {
   primaryColor: ColorValue
   backgroundColor: ColorValue
+  separatorColor: ColorValue
   iconColor: ColorValue
   cardColor: ColorValue
   h1Color: ColorValue
@@ -18,6 +19,7 @@ export interface Theme {
 export const lightTheme: Theme = {
   primaryColor: 'rgb(0, 122, 255)',
   backgroundColor: 'rgb(242, 242, 242)',
+  separatorColor: 'black',
   iconColor: 'black',
   cardColor: 'lightgrey',
   h1Color: 'black',
@@ -31,8 +33,9 @@ export const lightTheme: Theme = {
 
 export const darkTheme: Theme = {
   primaryColor: 'rgb(10, 132, 255)',
-  iconColor: 'white',
   backgroundColor: 'rgb(1, 1, 1)',
+  separatorColor: 'white',
+  iconColor: 'white',
   cardColor: 'lightgrey',
   h1Color: 'white',
   h2Color: 'white',
