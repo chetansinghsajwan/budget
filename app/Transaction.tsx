@@ -1,5 +1,5 @@
 import { View } from '@components/ui/View'
-import { TransactionLayout } from '@components/forms/Transaction'
+import { TransactionLayout } from '@components/layout/Transaction'
 import { Transaction } from '@services/Transaction'
 
 export interface TransactionPageProps {

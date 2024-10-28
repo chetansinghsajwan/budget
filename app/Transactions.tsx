@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Transaction } from '@services/Transaction'
 import { FlatList, GestureResponderEvent } from 'react-native'
-import { TransactionItem } from '@components/forms/TransactionItem'
+import { TransactionItem } from '@components/layout/TransactionItem'
 import { client } from '@services/Client'
 import { Text } from '@components/ui/Text'
 import { View } from '@components/ui/View'
