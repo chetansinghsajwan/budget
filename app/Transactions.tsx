@@ -7,8 +7,10 @@ import { Text } from '@components/ui/Text'
 import { View } from '@components/ui/View'
 import { Button } from '@components/ui/Button'
 import { router } from 'expo-router'
+import { useTheme } from '@components/Theme'
 
 export const TransactionsPage = () => {
+  const theme = useTheme()
   const [transactions, setTransactions] = useState<Transaction[]>([])
 
   client.getTransactions().then(transactions => {
@@ -22,19 +24,45 @@ export const TransactionsPage = () => {
   return (
     <View
       style={{
-        padding: 30,
+        backgroundColor: theme.backgroundColor,
       }}
     >
-      <View row>
+      <View
+        id='top-buttons-container'
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'flex-end',
+          padding: 30,
+        }}
+      >
+        <Button icon='plus' onPress={onCreateTransaction} />
+      </View>
+
+      <View
+        id='heading-container'
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'center',
+          height: 300,
+        }}
+      >
         <Text value='Transactions' category='h1' />
-        <Button label='create' onPress={onCreateTransaction} />
       </View>
 
       <FlatList
+        id='transactions-container'
         data={transactions}
         scrollEnabled
+        contentContainerStyle={{
+          gap: 13,
+          padding: 15,
+          alignItems: 'center',
+        }}
         renderItem={item => <TransactionItem transaction={item.item} />}
       />
     </View>
   )
 }
+
+export default TransactionsPage

@@ -30,7 +30,7 @@ export const Text = (props: TextProps) => {
     theme,
   )
 
-  return <ReactNative.Text style={style} children={text} />
+  return text && <ReactNative.Text style={style} children={text} />
 }
 
 const _getTextStyle = (

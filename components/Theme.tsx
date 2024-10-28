@@ -39,7 +39,7 @@ export const lightTheme: Theme = {
   iconColor: 'black',
   cardColor: 'lightgrey',
   h1FontFamily: 'Poppins_400Regular',
-  h1Size: 40,
+  h1Size: 50,
   h1Color: 'black',
   h2FontFamily: 'Poppins_400Regular',
   h2Size: 35,
@@ -64,11 +64,11 @@ export const lightTheme: Theme = {
 export const darkTheme: Theme = {
   ...lightTheme,
 
-  primaryColor: 'rgb(10, 132, 255)',
-  backgroundColor: 'rgb(1, 1, 1)',
+  primaryColor: '#000000',
+  backgroundColor: '#000000', // Black
   separatorColor: 'white',
   iconColor: 'white',
-  cardColor: 'lightgrey',
+  cardColor: '#28282B', // Matte Black
   h1Color: 'white',
   h2Color: 'white',
   h3Color: 'white',

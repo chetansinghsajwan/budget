@@ -1,6 +1,7 @@
 import { Pressable, PressableProps } from 'react-native'
 import { Icon, IconName } from '@components/ui/Icon'
 import { Text } from '@components/ui/Text'
+import { useTheme } from '@components/Theme'
 
 export type ButtonProps = PressableProps & {
   label?: string
@@ -8,17 +9,18 @@ export type ButtonProps = PressableProps & {
 }
 
 export const Button = (props: ButtonProps) => {
+  const theme = useTheme()
+
   return (
     <Pressable
       style={{
+        flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 32,
-        elevation: 3,
+        padding: 15,
         borderWidth: 2,
-        borderRadius: 10,
-        flexDirection: 'row',
+        borderRadius: 50,
+        borderColor: theme.iconColor,
         gap: 15,
       }}
       {...props}
