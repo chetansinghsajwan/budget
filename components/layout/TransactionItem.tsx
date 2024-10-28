@@ -2,6 +2,7 @@ import { Card } from '@components/ui/Card'
 import { View } from '@components/ui/View'
 import { Text } from '@components/ui/Text'
 import { Transaction } from '@services/Transaction'
+import { useTheme } from '@components/Theme'
 
 export interface TransactionProps {
   transaction: Transaction
@@ -11,13 +12,15 @@ export const TransactionItem = (props: TransactionProps) => {
   const transaction = props.transaction
   const transactionSign = transaction.type === 'credit' ? '+' : '-'
 
+  const theme = useTheme()
+
   return (
     <Card
       style={{
         margin: 10,
         borderRadius: 20,
         borderColor: 'black',
-        backgroundColor: 'lightgrey',
+        backgroundColor: theme.cardColor,
         padding: 20,
         maxWidth: 400,
       }}

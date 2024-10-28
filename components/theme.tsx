@@ -1,25 +1,64 @@
-import { Theme } from '@react-navigation/native'
+import React from 'react'
+import { ColorValue } from 'react-native'
+
+export interface Theme {
+  primaryColor: ColorValue
+  backgroundColor: ColorValue
+  iconColor: ColorValue
+  cardColor: ColorValue
+  h1Color: ColorValue
+  h2Color: ColorValue
+  h3Color: ColorValue
+  h4Color: ColorValue
+  h5Color: ColorValue
+  h6Color: ColorValue
+  textColor: ColorValue
+}
 
 export const lightTheme: Theme = {
-  dark: false,
-  colors: {
-    primary: 'rgb(0, 122, 255)',
-    background: 'rgb(242, 242, 242)',
-    card: 'rgb(255, 255, 255)',
-    text: 'rgb(28, 28, 30)',
-    border: 'rgb(216, 216, 216)',
-    notification: 'rgb(255, 59, 48)',
-  },
+  primaryColor: 'rgb(0, 122, 255)',
+  backgroundColor: 'rgb(242, 242, 242)',
+  iconColor: 'black',
+  cardColor: 'lightgrey',
+  h1Color: 'black',
+  h2Color: 'black',
+  h3Color: 'black',
+  h4Color: 'black',
+  h5Color: 'black',
+  h6Color: 'black',
+  textColor: 'black',
 }
 
 export const darkTheme: Theme = {
-  dark: true,
-  colors: {
-    primary: 'rgb(10, 132, 255)',
-    background: 'rgb(1, 1, 1)',
-    card: 'rgb(18, 18, 18)',
-    text: 'rgb(229, 229, 231)',
-    border: 'rgb(39, 39, 41)',
-    notification: 'rgb(255, 69, 58)',
-  },
+  primaryColor: 'rgb(10, 132, 255)',
+  iconColor: 'white',
+  backgroundColor: 'rgb(1, 1, 1)',
+  cardColor: 'lightgrey',
+  h1Color: 'white',
+  h2Color: 'white',
+  h3Color: 'white',
+  h4Color: 'white',
+  h5Color: 'white',
+  h6Color: 'white',
+  textColor: 'white',
+}
+
+export const ThemeContext = React.createContext<Theme>(lightTheme)
+
+export interface ThemeProviderProps {
+  theme?: Theme
+  children: any
+}
+
+export const ThemeProvider = (props: ThemeProviderProps) => {
+  return (
+    <ThemeContext.Provider
+      value={props.theme ?? lightTheme}
+      children={props.children}
+    />
+  )
+}
+
+export const useTheme = (): Theme => {
+  return React.useContext(ThemeContext)
 }

@@ -1,6 +1,6 @@
 import * as TablerIcons from '@tabler/icons-react-native'
-import { useTheme } from '@react-navigation/native'
 import { View, ViewProps } from '@components/ui/View'
+import { useTheme } from '@components/Theme'
 
 export type IconName =
   | 'plus'
@@ -24,11 +24,7 @@ export const Icon = (props: IconProps) => {
     return <View />
   }
 
-  return (
-    <View {...props}>
-      {<TablerIcon color={theme.dark ? 'white' : 'black'} />}
-    </View>
-  )
+  return <View {...props}>{<TablerIcon color={theme.iconColor} />}</View>
 }
 
 const getTablerIcon = (name?: IconName): TablerIcons.Icon | undefined => {
