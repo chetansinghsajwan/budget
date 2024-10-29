@@ -101,7 +101,9 @@ export const TransactionsPage = () => {
         }}
       >
         <BottomSheetScrollView>
-          {transaction && <TransactionLayout transaction={transaction} />}
+          {transaction && (
+            <TransactionLayout transaction={transaction} canEdit />
+          )}
         </BottomSheetScrollView>
       </BottomSheet>
     </View>
