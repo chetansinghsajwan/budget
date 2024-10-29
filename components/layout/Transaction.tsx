@@ -56,8 +56,6 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
           buttons={[
             { id: 'credit', label: 'Credit' },
             { id: 'debit', label: 'Debit' },
-            { id: 'debit', label: 'Debit' },
-            { id: 'debit', label: 'Debit' },
           ]}
         />
 

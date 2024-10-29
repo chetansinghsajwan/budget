@@ -38,7 +38,7 @@ export const RadioCard = (props: RadioCardProps) => {
         }}
       >
         {props.buttons.map(button => {
-          return <RadioButton {...button} />
+          return <RadioButton key={button.id} {...button} />
         })}
       </View>
     </Card>
