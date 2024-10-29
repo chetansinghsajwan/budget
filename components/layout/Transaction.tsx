@@ -1,55 +1,74 @@
 import { View } from '@components/ui/View'
+import { PageTitle } from '@components/ui/PageTitle'
+import { RadioCard } from '@components/ui/RadioCard'
+import { CurrencyCard } from '@components/ui/CurrencyCard'
+import { TimeCard } from '@components/ui/TimeCard'
 import { Button } from '@components/ui/Button'
-import { TextField } from '@components/ui/TextField'
-import { RadioGroup } from '@components/ui/RadioGroup'
 import { Transaction } from '@services/Transaction'
-import { Icon } from '@components/ui/Icon'
 
 export interface TransactionLayoutProps {
   transaction: Transaction
 }
 
 export const TransactionLayout = (props: TransactionLayoutProps) => {
-  const onTransactionTypeChange = (value: string) => {
+  const transaction = props.transaction
+
+  const onTypeChange = (value: string) => {
     console.log(`transaction type set to ${value}`)
   }
 
+  const onEdit = () => {}
+  const onCancel = () => {}
+  const onSave = () => {}
+
   return (
     <View>
-      {/* Amount */}
-      <TextField placeholder='Amount' inputMode='numeric' />
-
-      {/* TransactionLayout type */}
-      <RadioGroup
-        key='transaction-type'
-        onPress={onTransactionTypeChange}
-        containerStyle={{
-          flexDirection: 'row',
-        }}
-        radioButtons={[
-          {
-            id: 'credit',
-            label: 'Credit',
-          },
-          {
-            id: 'debit',
-            label: 'Debit',
-          },
-        ]}
-      />
-
       <View
+        id='top-buttons'
         style={{
           flexDirection: 'row',
-          justifyContent: 'flex-end',
-          gap: 15,
+          justifyContent: 'space-between',
+          padding: 20,
         }}
       >
-        {/* Cancel */}
-        <Button label='Cancel' icon='cross' />
+        <Button icon='cross' onPress={onCancel} />
 
         {/* Save */}
-        <Button label='Save' icon='check' />
+        <Button icon='check' onPress={onSave} />
+      </View>
+
+      {/* Title */}
+      <PageTitle title={transaction.title} />
+
+      {/* Contents */}
+      <View
+        id='contents'
+        style={{
+          gap: 10,
+          padding: 20,
+        }}
+      >
+        {/* Type */}
+        <RadioCard
+          id='transaction-type'
+          onValueChange={onTypeChange}
+          initialValue='credit'
+          buttons={[
+            { id: 'credit', label: 'Credit' },
+            { id: 'debit', label: 'Debit' },
+            { id: 'debit', label: 'Debit' },
+            { id: 'debit', label: 'Debit' },
+          ]}
+        />
+
+        {/* Amount */}
+        <CurrencyCard value={transaction.amount} />
+
+        {/* Time */}
+        <TimeCard value={transaction.time} />
+
+        {/* Location */}
+        {/* <LocationCard value={transaction.location} /> */}
       </View>
     </View>
   )

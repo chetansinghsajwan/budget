@@ -15,15 +15,7 @@ export const TransactionItem = (props: TransactionProps) => {
   const transactionSign = transaction.type === 'credit' ? '+' : '-'
 
   return (
-    <Card
-      style={{
-        borderRadius: 20,
-        backgroundColor: theme.cardColor,
-        padding: 20,
-        minWidth: 400,
-        maxWidth: 700,
-      }}
-    >
+    <Card>
       <View row space-between>
         <Text value={transaction.title} category='h5' />
         <Text value={transaction.time} format='datetime' category='h5' />
