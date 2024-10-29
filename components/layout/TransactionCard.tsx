@@ -31,7 +31,7 @@ export const TransactionCard = (props: TransactionProps) => {
           </View>
           <Text value={transaction.category} category='h6' />
         </View>
-      </View>{' '}
+      </View>
     </Card>
   )
 }
