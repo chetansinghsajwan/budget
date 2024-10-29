@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Transaction } from '@services/Transaction'
 import { FlatList, GestureResponderEvent } from 'react-native'
-import { TransactionItem } from '@components/layout/TransactionItem'
+import { TransactionCard } from '@components/layout/TransactionCard'
 import { client } from '@services/Client'
 import { Text } from '@components/ui/Text'
 import { View } from '@components/ui/View'
@@ -59,7 +59,7 @@ export const TransactionsPage = () => {
           padding: 15,
           alignItems: 'center',
         }}
-        renderItem={item => <TransactionItem transaction={item.item} />}
+        renderItem={item => <TransactionCard transaction={item.item} />}
       />
     </View>
   )
