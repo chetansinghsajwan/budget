@@ -64,7 +64,7 @@ export const lightTheme: Theme = {
 export const darkTheme: Theme = {
   ...lightTheme,
 
-  primaryColor: '#000000',
+  primaryColor: '#353935', // Onyx
   backgroundColor: '#000000', // Black
   separatorColor: 'white',
   iconColor: 'white',
