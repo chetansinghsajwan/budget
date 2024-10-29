@@ -29,7 +29,7 @@ export const TransactionPage = (props: TransactionPageProps) => {
         width: '100%',
       }}
     >
-      <TransactionLayout transaction={transaction} />
+      <TransactionLayout transaction={transaction} canEdit />
     </View>
   )
 }

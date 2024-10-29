@@ -5,36 +5,78 @@ import { CurrencyCard } from '@components/ui/CurrencyCard'
 import { TimeCard } from '@components/ui/TimeCard'
 import { Button } from '@components/ui/Button'
 import { Transaction } from '@services/Transaction'
+import React from 'react'
 
 export interface TransactionLayoutProps {
   transaction: Transaction
+  canEdit?: boolean
+  isEditInitialMode?: boolean
 }
 
 export const TransactionLayout = (props: TransactionLayoutProps) => {
   const transaction = props.transaction
+  const canEdit = props.canEdit ?? false
+  const isEditInitialMode = props.isEditInitialMode ?? false
+
+  const [isEditMode, setIsEditMode] = React.useState(isEditInitialMode)
 
   const onTypeChange = (value: string) => {
     console.log(`transaction type set to ${value}`)
   }
 
-  const onEdit = () => {}
-  const onCancel = () => {}
-  const onSave = () => {}
+  const onEdit = () => {
+    setIsEditMode(true)
+  }
 
-  return (
-    <View>
+  const onCancel = () => {
+    setIsEditMode(false)
+  }
+
+  const onSave = () => {
+    setIsEditMode(false)
+  }
+
+  const NormalModeTopBar = () => {
+    if (!canEdit) return <View />
+
+    return (
       <View
-        id='top-buttons'
+        style={{
+          width: '100%',
+          alignItems: 'flex-end',
+        }}
+      >
+        <Button icon='edit' onPress={onEdit} />
+      </View>
+    )
+  }
+
+  const EditModeTopBar = () => {
+    return (
+      <View
         style={{
           flexDirection: 'row',
           justifyContent: 'space-between',
-          padding: 20,
         }}
       >
         <Button icon='cross' onPress={onCancel} />
-
-        {/* Save */}
         <Button icon='check' onPress={onSave} />
+      </View>
+    )
+  }
+
+  return (
+    <View>
+      {/* Top Buttons */}
+      <View
+        id='top-buttons'
+        style={{
+          height: 70,
+          width: '100%',
+          padding: 20,
+        }}
+      >
+        {isEditMode ? <EditModeTopBar /> : <NormalModeTopBar />}
       </View>
 
       {/* Title */}

@@ -11,6 +11,8 @@ export type IconName =
   | 'correct'
   | 'currency-rupee'
   | 'clock'
+  | 'pencil'
+  | 'edit'
 
 export interface IconProps extends ViewProps {
   name?: IconName
@@ -45,6 +47,10 @@ const getTablerIcon = (name?: IconName): TablerIcons.Icon | undefined => {
       return TablerIcons.IconCurrencyRupee
     case 'clock':
       return TablerIcons.IconClock
+    case 'pencil':
+      return TablerIcons.IconPencil
+    case 'edit':
+      return TablerIcons.IconPencil
     default:
       return undefined
   }
