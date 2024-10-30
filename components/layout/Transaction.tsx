@@ -107,7 +107,11 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
         />
 
         {/* Amount */}
-        <CurrencyCard value={transaction.amount} />
+        <CurrencyCard
+          value={transaction.amount}
+          onValueChange={value => transaction.amount = value}
+          editable={isEditMode}
+        />
 
         {/* Time */}
         <TimeCard value={transaction.time} />
