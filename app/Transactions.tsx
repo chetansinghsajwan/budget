@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React from 'react'
 import { Transaction } from '@services/Transaction'
 import { FlatList, GestureResponderEvent, Pressable } from 'react-native'
 import { TransactionCard } from '@components/layout/TransactionCard'
@@ -8,16 +8,16 @@ import { Button } from '@components/ui/Button'
 import { useTheme } from '@components/Theme'
 import { TransactionLayout } from '@components/layout/Transaction'
 import { PageTitle } from '@components/ui/PageTitle'
-import BottomSheet, { BottomSheetScrollView } from '@gorhom/bottom-sheet'
+import { SlidingSheet, useSlidingSheet } from '@components/ui/SlidingSheet'
 
 export const TransactionsPage = () => {
   const theme = useTheme()
-  const sheetRef = useRef<BottomSheet>(null)
+  const sheetRef = useSlidingSheet()
   const sheetSnapPoints = ['50%', '90%']
-  const [transactions, setTransactions] = useState<Transaction[]>([])
-  const [transaction, setTransaction] = useState<Transaction>()
+  const [transactions, setTransactions] = React.useState<Transaction[]>([])
+  const [transaction, setTransaction] = React.useState<Transaction>()
 
-  useEffect(() => {
+  React.useEffect(() => {
     client.getTransactions().then(transactions => {
       setTransactions(transactions)
     })
@@ -84,28 +84,14 @@ export const TransactionsPage = () => {
         )}
       />
 
-      <BottomSheet
+      <SlidingSheet
         ref={sheetRef}
         snapPoints={sheetSnapPoints}
-        index={-1}
-        enablePanDownToClose
+        initialSnapIndex={-1}
         onClose={onSheetClose}
-        handleStyle={{
-          backgroundColor: theme.primaryColor,
-        }}
-        handleIndicatorStyle={{
-          backgroundColor: theme.iconColor,
-        }}
-        backgroundStyle={{
-          backgroundColor: theme.backgroundColor,
-        }}
       >
-        <BottomSheetScrollView>
-          {transaction && (
-            <TransactionLayout transaction={transaction} canEdit />
-          )}
-        </BottomSheetScrollView>
-      </BottomSheet>
+        {transaction && <TransactionLayout transaction={transaction} canEdit />}
+      </SlidingSheet>
     </View>
   )
 }
