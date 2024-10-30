@@ -13,6 +13,11 @@ export type IconName =
   | 'clock'
   | 'pencil'
   | 'edit'
+  | 'arrow-left'
+  | 'arrow-right'
+  | 'arrow-up'
+  | 'arrow-down'
+  | 'back'
 
 export interface IconProps extends ViewProps {
   name?: IconName
@@ -51,6 +56,16 @@ const getTablerIcon = (name?: IconName): TablerIcons.Icon | undefined => {
       return TablerIcons.IconPencil
     case 'edit':
       return TablerIcons.IconPencil
+    case 'arrow-left':
+      return TablerIcons.IconArrowLeft
+    case 'arrow-right':
+      return TablerIcons.IconArrowRight
+    case 'arrow-up':
+      return TablerIcons.IconArrowUp
+    case 'arrow-down':
+      return TablerIcons.IconArrowDown
+    case 'back':
+      return TablerIcons.IconArrowLeft
     default:
       return undefined
   }

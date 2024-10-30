@@ -24,6 +24,10 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
     console.log(`transaction type set to ${value}`)
   }
 
+  const onClose = () => {
+    setIsEditMode(false)
+  }
+
   const onEdit = () => {
     setIsEditMode(true)
   }
@@ -42,10 +46,11 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
     return (
       <View
         style={{
-          width: '100%',
-          alignItems: 'flex-end',
+          flexDirection: 'row',
+          justifyContent: 'space-between',
         }}
       >
+        <Button icon='back' onPress={onClose} />
         <Button icon='edit' onPress={onEdit} />
       </View>
     )
@@ -67,9 +72,9 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
 
   return (
     <View>
-      {/* Top Buttons */}
+      {/* Top Bar */}
       <View
-        id='top-buttons'
+        id='top-bar'
         style={{
           height: 70,
           width: '100%',
