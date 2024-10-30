@@ -34,39 +34,25 @@ export const Icon = (props: IconProps) => {
   return <View {...props}>{<TablerIcon color={theme.iconColor} />}</View>
 }
 
+const _tablerIconMap = {
+  none: undefined,
+  plus: TablerIcons.IconPlus,
+  cross: TablerIcons.IconX,
+  cancel: TablerIcons.IconX,
+  wrong: TablerIcons.IconX,
+  check: TablerIcons.IconCheck,
+  correct: TablerIcons.IconCheck,
+  'currency-rupee': TablerIcons.IconCurrencyRupee,
+  clock: TablerIcons.IconClock,
+  pencil: TablerIcons.IconPencil,
+  edit: TablerIcons.IconPencil,
+  'arrow-left': TablerIcons.IconArrowLeft,
+  'arrow-right': TablerIcons.IconArrowRight,
+  'arrow-up': TablerIcons.IconArrowUp,
+  'arrow-down': TablerIcons.IconArrowDown,
+  back: TablerIcons.IconArrowLeft,
+}
+
 const getTablerIcon = (name?: IconName): TablerIcons.Icon | undefined => {
-  switch (name) {
-    case 'plus':
-      return TablerIcons.IconPlus
-    case 'cross':
-      return TablerIcons.IconX
-    case 'cancel':
-      return TablerIcons.IconX
-    case 'wrong':
-      return TablerIcons.IconX
-    case 'check':
-      return TablerIcons.IconCheck
-    case 'correct':
-      return TablerIcons.IconCheck
-    case 'currency-rupee':
-      return TablerIcons.IconCurrencyRupee
-    case 'clock':
-      return TablerIcons.IconClock
-    case 'pencil':
-      return TablerIcons.IconPencil
-    case 'edit':
-      return TablerIcons.IconPencil
-    case 'arrow-left':
-      return TablerIcons.IconArrowLeft
-    case 'arrow-right':
-      return TablerIcons.IconArrowRight
-    case 'arrow-up':
-      return TablerIcons.IconArrowUp
-    case 'arrow-down':
-      return TablerIcons.IconArrowDown
-    case 'back':
-      return TablerIcons.IconArrowLeft
-    default:
-      return undefined
-  }
+  return _tablerIconMap[name ?? 'none']
 }
