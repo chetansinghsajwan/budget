@@ -8,7 +8,11 @@ import { Button } from '@components/ui/Button'
 import { useTheme } from '@components/Theme'
 import { TransactionLayout } from '@components/layout/Transaction'
 import { PageTitle } from '@components/ui/PageTitle'
-import { SlidingSheet, useSlidingSheet } from '@components/ui/SlidingSheet'
+import {
+  SlidingSheet,
+  SlidingSheetScrollView,
+  useSlidingSheet,
+} from '@components/ui/SlidingSheet'
 
 export const TransactionsPage = () => {
   const theme = useTheme()
@@ -90,7 +94,11 @@ export const TransactionsPage = () => {
         initialSnapIndex={-1}
         onClose={onSheetClose}
       >
-        {transaction && <TransactionLayout transaction={transaction} canEdit />}
+        <SlidingSheetScrollView>
+          {transaction && (
+            <TransactionLayout transaction={transaction} canEdit />
+          )}
+        </SlidingSheetScrollView>
       </SlidingSheet>
     </View>
   )

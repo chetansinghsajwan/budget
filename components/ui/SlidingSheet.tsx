@@ -37,9 +37,10 @@ export const SlidingSheet = React.forwardRef(
         backgroundStyle={{
           backgroundColor: theme.backgroundColor,
         }}
-      >
-        <BottomSheetScrollView>{props.children}</BottomSheetScrollView>
-      </BottomSheet>
+        children={props.children}
+      />
     )
   },
 )
+
+export const SlidingSheetScrollView = BottomSheetScrollView
