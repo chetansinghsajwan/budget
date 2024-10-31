@@ -40,43 +40,43 @@ const _getTextStyle = (
   switch (category) {
     case 'h1':
       return {
-        fontFamily: theme.h1FontFamily,
+        fontFamily: theme.h1Family,
         fontSize: theme.h1Size,
         color: theme.h1Color,
       }
     case 'h2':
       return {
-        fontFamily: theme.h2FontFamily,
+        fontFamily: theme.h2Family,
         fontSize: theme.h2Size,
         color: theme.h2Color,
       }
     case 'h3':
       return {
-        fontFamily: theme.h3FontFamily,
+        fontFamily: theme.h3Family,
         fontSize: theme.h3Size,
         color: theme.h3Color,
       }
     case 'h4':
       return {
-        fontFamily: theme.h4FontFamily,
+        fontFamily: theme.h4Family,
         fontSize: theme.h4Size,
         color: theme.h4Color,
       }
     case 'h5':
       return {
-        fontFamily: theme.h5FontFamily,
+        fontFamily: theme.h5Family,
         fontSize: theme.h5Size,
         color: theme.h5Color,
       }
     case 'h6':
       return {
-        fontFamily: theme.h6FontFamily,
+        fontFamily: theme.h6Family,
         fontSize: theme.h6Size,
         color: theme.h6Color,
       }
     case 'text':
       return {
-        fontFamily: theme.textFontFamily,
+        fontFamily: theme.textFamily,
         fontSize: theme.textSize,
         color: theme.textColor,
       }

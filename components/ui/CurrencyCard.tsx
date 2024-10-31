@@ -56,7 +56,7 @@ export const CurrencyCard = (props: CurrencyCardProps) => {
             editable={editable}
             style={{
               outlineStyle: 'none',
-              fontFamily: theme.h5FontFamily,
+              fontFamily: theme.h5Family,
               fontSize: theme.h5Size,
               borderWidth: 0,
             }}

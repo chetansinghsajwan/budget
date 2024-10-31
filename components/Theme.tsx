@@ -9,25 +9,25 @@ export interface Theme {
   separatorColor: ColorValue
   iconColor: ColorValue
   cardColor: ColorValue
-  h1FontFamily: string
+  h1Family: string
   h1Size: number
   h1Color: ColorValue
-  h2FontFamily: string
+  h2Family: string
   h2Size: number
   h2Color: ColorValue
-  h3FontFamily: string
+  h3Family: string
   h3Size: number
   h3Color: ColorValue
-  h4FontFamily: string
+  h4Family: string
   h4Size: number
   h4Color: ColorValue
-  h5FontFamily: string
+  h5Family: string
   h5Size: number
   h5Color: ColorValue
-  h6FontFamily: string
+  h6Family: string
   h6Size: number
   h6Color: ColorValue
-  textFontFamily: string
+  textFamily: string
   textSize: number
   textColor: ColorValue
 }
@@ -38,25 +38,25 @@ export const lightTheme: Theme = {
   separatorColor: 'black',
   iconColor: 'black',
   cardColor: 'lightgrey',
-  h1FontFamily: 'Poppins_400Regular',
+  h1Family: 'Poppins_400Regular',
   h1Size: 50,
   h1Color: 'black',
-  h2FontFamily: 'Poppins_400Regular',
+  h2Family: 'Poppins_400Regular',
   h2Size: 35,
   h2Color: 'black',
-  h3FontFamily: 'Poppins_400Regular',
+  h3Family: 'Poppins_400Regular',
   h3Size: 30,
   h3Color: 'black',
-  h4FontFamily: 'Poppins_400Regular',
+  h4Family: 'Poppins_400Regular',
   h4Size: 25,
   h4Color: 'black',
-  h5FontFamily: 'Poppins_400Regular',
+  h5Family: 'Poppins_400Regular',
   h5Size: 20,
   h5Color: 'black',
-  h6FontFamily: 'Poppins_400Regular',
+  h6Family: 'Poppins_400Regular',
   h6Size: 15,
   h6Color: 'black',
-  textFontFamily: 'Poppins_400Regular',
+  textFamily: 'Poppins_400Regular',
   textSize: 10,
   textColor: 'black',
 }
