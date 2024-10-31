@@ -3,12 +3,21 @@ import { ColorValue, useColorScheme } from 'react-native'
 import { useFonts } from 'expo-font'
 import { Poppins_400Regular } from '@expo-google-fonts/poppins'
 
+const colors = {
+  matteBlack: '#28282B',
+  onyx: '#353935',
+  black: '#000000',
+  white: '#FFFFFF',
+}
+
 export interface Theme {
   primaryColor: ColorValue
   backgroundColor: ColorValue
   separatorColor: ColorValue
   iconColor: ColorValue
   cardColor: ColorValue
+  listItemColor: ColorValue
+  selectedListItemColor: ColorValue
   h1Family: string
   h1Size: number
   h1Color: ColorValue
@@ -35,47 +44,51 @@ export interface Theme {
 export const lightTheme: Theme = {
   primaryColor: 'rgb(0, 122, 255)',
   backgroundColor: 'rgb(242, 242, 242)',
-  separatorColor: 'black',
-  iconColor: 'black',
+  separatorColor: colors.black,
+  iconColor: colors.black,
   cardColor: 'lightgrey',
+  listItemColor: 'lightgrey',
+  selectedListItemColor: 'grey',
   h1Family: 'Poppins_400Regular',
   h1Size: 50,
-  h1Color: 'black',
+  h1Color: colors.black,
   h2Family: 'Poppins_400Regular',
   h2Size: 35,
-  h2Color: 'black',
+  h2Color: colors.black,
   h3Family: 'Poppins_400Regular',
   h3Size: 30,
-  h3Color: 'black',
+  h3Color: colors.black,
   h4Family: 'Poppins_400Regular',
   h4Size: 25,
-  h4Color: 'black',
+  h4Color: colors.black,
   h5Family: 'Poppins_400Regular',
   h5Size: 20,
-  h5Color: 'black',
+  h5Color: colors.black,
   h6Family: 'Poppins_400Regular',
   h6Size: 15,
-  h6Color: 'black',
+  h6Color: colors.black,
   textFamily: 'Poppins_400Regular',
   textSize: 10,
-  textColor: 'black',
+  textColor: colors.black,
 }
 
 export const darkTheme: Theme = {
   ...lightTheme,
 
-  primaryColor: '#353935', // Onyx
-  backgroundColor: '#000000', // Black
-  separatorColor: 'white',
-  iconColor: 'white',
-  cardColor: '#28282B', // Matte Black
-  h1Color: 'white',
-  h2Color: 'white',
-  h3Color: 'white',
-  h4Color: 'white',
-  h5Color: 'white',
-  h6Color: 'white',
-  textColor: 'white',
+  primaryColor: colors.onyx,
+  backgroundColor: colors.black,
+  separatorColor: colors.white,
+  iconColor: colors.white,
+  cardColor: colors.matteBlack,
+  listItemColor: colors.matteBlack,
+  selectedListItemColor: colors.onyx,
+  h1Color: colors.white,
+  h2Color: colors.white,
+  h3Color: colors.white,
+  h4Color: colors.white,
+  h5Color: colors.white,
+  h6Color: colors.white,
+  textColor: colors.white,
 }
 
 export const ThemeContext = React.createContext<Theme>(lightTheme)
