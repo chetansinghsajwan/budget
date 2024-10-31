@@ -18,6 +18,7 @@ export type IconName =
   | 'arrow-up'
   | 'arrow-down'
   | 'back'
+  | 'search'
 
 export interface IconProps extends ViewProps {
   name?: IconName
@@ -51,6 +52,7 @@ const _tablerIconMap = {
   'arrow-up': TablerIcons.IconArrowUp,
   'arrow-down': TablerIcons.IconArrowDown,
   back: TablerIcons.IconArrowLeft,
+  search: TablerIcons.IconSearch,
 }
 
 const getTablerIcon = (name?: IconName): TablerIcons.Icon | undefined => {
