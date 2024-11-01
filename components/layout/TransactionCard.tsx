@@ -16,8 +16,6 @@ export const TransactionCard = (props: TransactionProps) => {
       <View
         style={{
           padding: 20,
-          minWidth: 400,
-          maxWidth: 700,
         }}
       >
         <View row space-between>

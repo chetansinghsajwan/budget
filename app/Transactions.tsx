@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect, useState } from 'react'
 import { Transaction } from '@services/Transaction'
 import { FlatList, GestureResponderEvent, Pressable } from 'react-native'
 import { TransactionCard } from '@components/layout/TransactionCard'
@@ -13,23 +13,33 @@ import {
   SlidingSheetScrollView,
   useSlidingSheet,
 } from '@components/ui/SlidingSheet'
+import { SearchBar } from '@components/ui/SearchBar'
 
 export const TransactionsPage = () => {
   const theme = useTheme()
   const sheetRef = useSlidingSheet()
   const sheetSnapPoints = ['50%', '90%']
-  const [transactions, setTransactions] = React.useState<Transaction[]>([])
-  const [transaction, setTransaction] = React.useState<Transaction>()
+  const [transactions, setTransactions] = useState<Transaction[]>([])
+  const [transaction, setTransaction] = useState<Transaction>()
+  const [searchString, setSearchString] = useState<string>('')
+  const [filteredTransactions, setFilteredTransactions] = useState(transactions)
 
-  React.useEffect(() => {
+  useEffect(() => {
     client.getTransactions().then(transactions => {
       setTransactions(transactions)
     })
   }, [])
 
+  // update filterered transactions if `searchString` or `transactions` are updated
+  //
+  // @todo implement search logic
+  useEffect(() => {
+    setFilteredTransactions(transactions)
+  }, [searchString, transactions])
+
   const onCreateTransaction = (event: GestureResponderEvent) => {
     const emptyTransaction: Transaction = {
-      id: 0,
+      id: '2238-234-23-23-423-423',
       type: 'credit',
       title: '',
       amount: 0,
@@ -74,15 +84,27 @@ export const TransactionsPage = () => {
 
       <FlatList
         id='transactions-container'
-        data={transactions}
+        data={filteredTransactions}
+        keyExtractor={item => item.id}
         scrollEnabled
         contentContainerStyle={{
           gap: 13,
           padding: 15,
+          paddingTop: 0,
           alignItems: 'center',
         }}
+        ListHeaderComponent={() => (
+          <SearchBar value={searchString} onChange={setSearchString} />
+        )}
+        stickyHeaderIndices={[0]}
         renderItem={item => (
-          <Pressable onPress={() => onCardPress(item.item)}>
+          <Pressable
+            onPress={() => onCardPress(item.item)}
+            style={{
+              minWidth: 400,
+              maxWidth: 700,
+            }}
+          >
             <TransactionCard transaction={item.item} />
           </Pressable>
         )}
