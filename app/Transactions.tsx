@@ -80,7 +80,7 @@ export const TransactionsPage = () => {
         <Button icon='plus' onPress={onCreateTransaction} />
       </View>
 
-      <PageTitle title='Transactions' />
+      <PageTitle value='Transactions' />
 
       <FlatList
         id='transactions-container'
@@ -118,7 +118,11 @@ export const TransactionsPage = () => {
       >
         <SlidingSheetScrollView>
           {transaction && (
-            <TransactionLayout transaction={transaction} canEdit />
+            <TransactionLayout
+              value={transaction}
+              onChange={setTransaction}
+              editable
+            />
           )}
         </SlidingSheetScrollView>
       </SlidingSheet>

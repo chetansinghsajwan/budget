@@ -1,27 +1,51 @@
+import { useState } from 'react'
 import { View } from '@components/ui/View'
 import { PageTitle } from '@components/ui/PageTitle'
 import { RadioCard } from '@components/ui/RadioCard'
 import { CurrencyCard } from '@components/ui/CurrencyCard'
 import { TimeCard } from '@components/ui/TimeCard'
 import { Button } from '@components/ui/Button'
-import { Transaction } from '@services/Transaction'
-import React from 'react'
+import { Transaction, TransactionType } from '@services/Transaction'
 
 export interface TransactionLayoutProps {
-  transaction: Transaction
-  canEdit?: boolean
+  value: Transaction
+  onChange?: (value: Transaction) => void
+  editable?: boolean
   isEditInitialMode?: boolean
 }
 
 export const TransactionLayout = (props: TransactionLayoutProps) => {
-  const transaction = props.transaction
-  const canEdit = props.canEdit ?? false
+  const transaction = props.value
+  const canEdit = props.editable ?? false
   const isEditInitialMode = props.isEditInitialMode ?? false
 
-  const [isEditMode, setIsEditMode] = React.useState(isEditInitialMode)
+  const [isEditMode, setIsEditMode] = useState(isEditInitialMode)
+
+  const onTitleChange = (value: string) => {
+    if (!props.onChange) return
+
+    const newTransaction = {
+      ...transaction,
+      title: value,
+    }
+
+    props.onChange(newTransaction)
+  }
 
   const onTypeChange = (value: string) => {
-    console.log(`transaction type set to ${value}`)
+    if (!props.onChange) return
+
+    const type: TransactionType | undefined =
+      value === 'credit' ? 'credit' : value === 'debit' ? 'debit' : undefined
+
+    if (!type) return
+
+    const newTransaction = {
+      ...transaction,
+      type: type,
+    }
+
+    props.onChange(newTransaction)
   }
 
   const onClose = () => {
@@ -85,7 +109,12 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
       </View>
 
       {/* Title */}
-      <PageTitle title={transaction.title} />
+      <PageTitle
+        value={transaction.title}
+        placeholder='Title'
+        onChange={onTitleChange}
+        editable={isEditMode}
+      />
 
       {/* Contents */}
       <View
@@ -109,7 +138,7 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
         {/* Amount */}
         <CurrencyCard
           value={transaction.amount}
-          onValueChange={value => transaction.amount = value}
+          onValueChange={value => (transaction.amount = value)}
           editable={isEditMode}
         />
 

@@ -39,6 +39,7 @@ export interface Theme {
   textFamily: string
   textSize: number
   textColor: ColorValue
+  placeholderColor: ColorValue
 }
 
 export const lightTheme: Theme = {
@@ -70,6 +71,7 @@ export const lightTheme: Theme = {
   textFamily: 'Poppins_400Regular',
   textSize: 10,
   textColor: colors.black,
+  placeholderColor: colors.matteBlack,
 }
 
 export const darkTheme: Theme = {
@@ -89,6 +91,7 @@ export const darkTheme: Theme = {
   h5Color: colors.white,
   h6Color: colors.white,
   textColor: colors.white,
+  placeholderColor: 'grey',
 }
 
 export const ThemeContext = React.createContext<Theme>(lightTheme)
