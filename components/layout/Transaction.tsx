@@ -10,16 +10,19 @@ import { Transaction, TransactionType } from '@services/Transaction'
 export interface TransactionLayoutProps {
   value: Transaction
   onChange?: (value: Transaction) => void
+
+  /// can edit values
   editable?: boolean
-  isEditInitialMode?: boolean
+
+  /// start as edit mode
+  edit?: boolean
 }
 
 export const TransactionLayout = (props: TransactionLayoutProps) => {
   const transaction = props.value
-  const canEdit = props.editable ?? false
-  const isEditInitialMode = props.isEditInitialMode ?? false
-
-  const [isEditMode, setIsEditMode] = useState(isEditInitialMode)
+  const editable = props.editable ?? false
+  const edit = props.edit ?? false
+  const [isEditMode, setIsEditMode] = useState(edit)
 
   const onTitleChange = (value: string) => {
     if (!props.onChange) return
@@ -34,11 +37,8 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
 
   const onTypeChange = (value: string) => {
     if (!props.onChange) return
-
-    const type: TransactionType | undefined =
-      value === 'credit' ? 'credit' : value === 'debit' ? 'debit' : undefined
-
-    if (!type) return
+    if (value !== 'credit' && value !== 'debit') return
+    const type: TransactionType = value as TransactionType
 
     const newTransaction = {
       ...transaction,
@@ -65,7 +65,7 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
   }
 
   const NormalModeTopBar = () => {
-    if (!canEdit) return <View />
+    if (!editable) return <View />
 
     return (
       <View
@@ -126,13 +126,13 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
       >
         {/* Type */}
         <RadioCard
-          id='transaction-type'
-          onValueChange={onTypeChange}
-          initialValue='credit'
-          buttons={[
+          value={transaction.type}
+          onChange={onTypeChange}
+          items={[
             { id: 'credit', label: 'Credit' },
             { id: 'debit', label: 'Debit' },
           ]}
+          editable={isEditMode}
         />
 
         {/* Amount */}
