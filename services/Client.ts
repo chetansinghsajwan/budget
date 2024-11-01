@@ -18,7 +18,7 @@ export class Client {
   generateDummyTransactions = async (count: number) => {
     for (let i = 0; i < count; i++) {
       const transaction: Transaction = {
-        id: i + 1,
+        id: (i + 1).toString(),
         title: `Title ${i + 1}`,
         amount: Math.floor(Math.random() * 1000) + 1,
         type: Math.random() > 0.5 ? 'credit' : 'debit',
@@ -38,7 +38,7 @@ export class Client {
     input: TransactionCreate,
   ): Promise<Transaction> => {
     const transaction = {
-      id: 0,
+      id: '242342-42-43242-42',
       title: input.title,
       type: input.type,
       category: input.category ?? '',

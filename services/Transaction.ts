@@ -1,9 +1,9 @@
 export type TransactionType = 'credit' | 'debit'
 
-export type TransactionId = number
+export type TransactionId = string
 
 export class Transaction {
-  id: TransactionId = 0
+  id: TransactionId = ''
   title: string = ''
   amount: number = 0
   type: TransactionType = 'credit'
