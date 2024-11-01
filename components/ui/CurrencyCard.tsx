@@ -10,7 +10,7 @@ export type CurrencyType = 'inr' | 'usd' | 'lkr'
 export type CurrencyCardProps = CardProps & {
   value: number
   type?: CurrencyType
-  onValueChange?: (value: number) => void
+  onChange?: (value: number) => void
   editable?: boolean
 }
 
@@ -21,11 +21,11 @@ export const CurrencyCard = (props: CurrencyCardProps) => {
   const getValueString = () => props.value.toString()
 
   const onValueChange = (newValueString: string) => {
-    if (!props.onValueChange) return
+    if (!props.onChange) return
 
     newValueString = newValueString.replace(/[^0-9]/g, '')
     const newValue = parseInt(newValueString)
-    props.onValueChange(newValue)
+    props.onChange(newValue)
   }
 
   return (
@@ -45,23 +45,16 @@ export const CurrencyCard = (props: CurrencyCardProps) => {
         >
           <Icon name='currency-rupee' />
         </View>
-        <View
+        <TextInput
+          value={getValueString()}
+          onChangeText={onValueChange}
+          editable={editable}
           style={{
-            justifyContent: 'center',
+            fontFamily: theme.h5Family,
+            fontSize: theme.h5Size,
+            color: theme.h5Color,
           }}
-        >
-          <TextInput
-            value={getValueString()}
-            onChangeText={onValueChange}
-            editable={editable}
-            style={{
-              outlineStyle: 'none',
-              fontFamily: theme.h5Family,
-              fontSize: theme.h5Size,
-              borderWidth: 0,
-            }}
-          />
-        </View>
+        />
       </View>
     </Card>
   )

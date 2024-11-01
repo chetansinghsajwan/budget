@@ -48,6 +48,17 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
     props.onChange(newTransaction)
   }
 
+  const onAmountChange = (value: number) => {
+    if (!props.onChange) return
+
+    const newTransaction = {
+      ...transaction,
+      amount: value,
+    }
+
+    props.onChange(newTransaction)
+  }
+
   const onClose = () => {
     setIsEditMode(false)
   }
@@ -138,7 +149,7 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
         {/* Amount */}
         <CurrencyCard
           value={transaction.amount}
-          onValueChange={value => (transaction.amount = value)}
+          onChange={onAmountChange}
           editable={isEditMode}
         />
 
