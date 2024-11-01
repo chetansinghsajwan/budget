@@ -29,33 +29,17 @@ export const CurrencyCard = (props: CurrencyCardProps) => {
   }
 
   return (
-    <Card>
-      <View
+    <Card icon='currency-rupee'>
+      <TextInput
+        value={getValueString()}
+        onChangeText={onValueChange}
+        editable={editable}
         style={{
-          flexDirection: 'row',
-          padding: 15,
+          fontFamily: theme.h5Family,
+          fontSize: theme.h5Size,
+          color: theme.h5Color,
         }}
-      >
-        <View
-          style={{
-            width: 60,
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}
-        >
-          <Icon name='currency-rupee' />
-        </View>
-        <TextInput
-          value={getValueString()}
-          onChangeText={onValueChange}
-          editable={editable}
-          style={{
-            fontFamily: theme.h5Family,
-            fontSize: theme.h5Size,
-            color: theme.h5Color,
-          }}
-        />
-      </View>
+      />
     </Card>
   )
 }
