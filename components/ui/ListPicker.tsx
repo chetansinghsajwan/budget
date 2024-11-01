@@ -2,15 +2,15 @@ import { forwardRef, useEffect, useState } from 'react'
 import {
   SlidingSheet,
   SlidingSheetRef,
-  SlidingSheetScrollView,
   useSlidingSheet,
 } from '@components/ui/SlidingSheet'
-import { Pressable } from 'react-native'
+import { ListRenderItemInfo, Pressable } from 'react-native'
 import { View } from '@components/ui/View'
 import { Text } from '@components/ui/Text'
 import { SearchBar } from '@components/ui/SearchBar'
 import { useTheme } from '@components/Theme'
-import { Icon } from './Icon'
+import { Icon } from '@components/ui/Icon'
+import { BottomSheetFlatList } from '@gorhom/bottom-sheet'
 
 export type ListPickerSearchFunc = (items: string[], search: string) => string[]
 
@@ -54,17 +54,17 @@ export const ListPicker = forwardRef(
     }
 
     const onSelect = (index: number) => {
-      ref.current?.close()
+      ref?.current?.close()
       props.onChange?.(index)
     }
 
     const onClear = () => {
-      ref.current?.close()
+      ref?.current?.close()
       props.onChange?.(undefined)
     }
 
     const openSheet = () => {
-      ref.current?.snapToIndex(0)
+      ref?.current?.snapToIndex(0)
     }
 
     const renderSearchBar = () => {
@@ -96,72 +96,61 @@ export const ListPicker = forwardRef(
       )
     }
 
-    const renderItem = (item: string, index: number) => {
+    const renderItem = (info: ListRenderItemInfo<string>) => {
       const bgcolor =
-        index === props.index
+        info.index === props.index
           ? theme.selectedListItemColor
-          : theme.listItemColor
+          : theme.backgroundColor
 
       return (
         <Pressable
           style={{
-            height: 50,
+            height: 60,
             width: '100%',
             justifyContent: 'center',
             paddingHorizontal: 20,
             paddingVertical: 5,
             backgroundColor: bgcolor,
             borderRadius: 10,
-            borderColor: 'white',
-            borderWidth: index === props.index ? 0 : 1,
+            borderWidth: info.index === props.index ? 0 : 1,
           }}
-          onPress={() => onSelect(index)}
+          onPress={() => onSelect(info.index)}
         >
-          <View>
-            <Text value={item} category='h6' />
-          </View>
+          <Text value={info.item} category='h6' />
         </Pressable>
       )
     }
 
-    return (
-      <View
-        style={{
-          height: '100%',
-          width: '100%',
-        }}
-      >
-        <SlidingSheet
-          ref={ref}
-          initialSnapIndex={-1}
-          snapPoints={sheetSnapPoints}
+    const ListHeader = () => {
+      return (
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            padding: 10,
+            gap: 10,
+            backgroundColor: theme.backgroundColor,
+          }}
         >
-          <View
-            style={{
-              padding: 10,
-              gap: 10,
-            }}
-          >
-            <View
-              style={{
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                gap: 10,
-              }}
-            >
-              {enableSearch && renderSearchBar()}
-              {enableClear && renderClearButton()}
-            </View>
-            <SlidingSheetScrollView
-              contentContainerStyle={{
-                gap: 7,
-              }}
-            >
-              {filteredItems.map((item, index) => renderItem(item, index))}
-            </SlidingSheetScrollView>
-          </View>
-        </SlidingSheet>
-      </View>
+          {enableSearch && renderSearchBar()}
+          {enableClear && renderClearButton()}
+        </View>
+      )
+    }
+
+    return (
+      <SlidingSheet
+        ref={ref}
+        initialSnapIndex={-1}
+        snapPoints={sheetSnapPoints}
+      >
+        <BottomSheetFlatList
+          data={filteredItems}
+          renderItem={renderItem}
+          ListHeaderComponent={ListHeader}
+          stickyHeaderIndices={[0]}
+        />
+      </SlidingSheet>
     )
   },
 )
