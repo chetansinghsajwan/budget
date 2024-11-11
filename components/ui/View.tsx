@@ -6,19 +6,14 @@ export type ViewProps = ReactNative.ViewProps & {
 }
 
 export const View = (props: ViewProps) => {
-  props = { ...props }
-
   return (
     <ReactNative.View
-      style={{
-        ...(props.row && {
-          flexDirection: 'row',
-        }),
-        ...(props['space-between'] && {
-          justifyContent: 'space-between',
-        }),
-      }}
       {...props}
+      style={[
+        props.row && { flexDirection: 'row' },
+        props['space-between'] && { justifyContent: 'space-between' },
+        props.style,
+      ]}
     />
   )
 }
