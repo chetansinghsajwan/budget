@@ -3,9 +3,9 @@ import { FlatList, GestureResponderEvent, Pressable } from 'react-native'
 import { View } from '@components/ui/View'
 import { Button } from '@components/ui/Button'
 import { useTheme } from '@components/Theme'
-import { TransactionLayout } from '@components/layout/Transaction'
-import { TransactionCard } from '@components/layout/TransactionCard'
-import { TransactionEditLayout } from '@components/layout/TransactionEdit'
+import { TransactionView } from '@components/views/TransactionView'
+import { TransactionCard } from '@components/cards/TransactionCard'
+import { TransactionEditView } from '@components/views/TransactionEditView'
 import { PageTitle } from '@components/ui/PageTitle'
 import {
   SlidingSheet,
@@ -120,7 +120,7 @@ export const TransactionsPage = () => {
       >
         <SlidingSheetScrollView>
           {transaction && (
-            <TransactionEditLayout
+            <TransactionEditView
               value={transaction}
               onChange={setTransaction}
             />
@@ -135,7 +135,7 @@ export const TransactionsPage = () => {
         onClose={onSheetClose}
       >
         <SlidingSheetScrollView>
-          {transaction && <TransactionLayout value={transaction} canEdit />}
+          {transaction && <TransactionView value={transaction} canEdit />}
         </SlidingSheetScrollView>
       </SlidingSheet>
     </View>

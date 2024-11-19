@@ -1,12 +1,12 @@
 import { View } from '@components/ui/View'
 import { PageTitle } from '@components/ui/PageTitle'
-import { RadioCard } from '@components/ui/RadioCard'
-import { CurrencyCard } from '@components/ui/CurrencyCard'
-import { TimeCard } from '@components/ui/TimeCard'
+import { RadioCard } from '@components/cards/RadioCard'
+import { CurrencyCard } from '@components/cards/CurrencyCard'
+import { TimeCard } from '@components/cards/TimeCard'
 import { Button } from '@components/ui/Button'
 import { Transaction } from '@services/Transaction'
 
-export interface TransactionLayoutProps {
+export interface TransactionViewProps {
   value: Transaction
   canEdit?: boolean
 }
@@ -15,7 +15,7 @@ const defaults = {
   canEdit: true,
 }
 
-export const TransactionLayout = (props: TransactionLayoutProps) => {
+export const TransactionView = (props: TransactionViewProps) => {
   const transaction = props.value
   const canEdit = props.canEdit ?? defaults.canEdit
 

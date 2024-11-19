@@ -12,20 +12,20 @@ import { useTheme } from '@components/Theme'
 import { Icon } from '@components/ui/Icon'
 import { BottomSheetFlatList } from '@gorhom/bottom-sheet'
 
-export type ListPickerSearchFunc = (items: string[], search: string) => string[]
+export type ListModalSearchFunc = (items: string[], search: string) => string[]
 
-export interface ListPickerProps {
+export interface ListModalProps {
   items: string[]
   index?: number
   onChange?: (index: number | undefined) => void
   enableSearch?: boolean
   enableClear?: boolean
-  searchFunc?: ListPickerSearchFunc
+  searchFunc?: ListModalSearchFunc
 }
 
-export type ListPickerRef = SlidingSheetRef
+export type ListModalRef = SlidingSheetRef
 
-export const useListPicker = () => {
+export const useListModal = () => {
   return useSlidingSheet()
 }
 
@@ -33,8 +33,8 @@ const defaultSearchFunc = (items: string[], search: string): string[] => {
   return items
 }
 
-export const ListPicker = forwardRef(
-  (props: ListPickerProps, ref: ListPickerRef) => {
+export const ListModal = forwardRef(
+  (props: ListModalProps, ref: ListModalRef) => {
     const theme = useTheme()
     const sheetSnapPoints = ['50%', '80%']
     const enableSearch = props.enableSearch ?? false

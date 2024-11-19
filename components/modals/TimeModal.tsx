@@ -7,14 +7,14 @@ import {
 } from '@components/ui/TimeRoller'
 import { Button } from '@components/ui/Button'
 
-export interface TimePickerProps {
+export interface TimeModalProps {
   value: Date
   onChange?: (value: Date) => void
   rollerProps?: TimeRollerProps
 }
 
-export const TimePicker = forwardRef(
-  (props: TimePickerProps, ref: SlidingSheetRef) => {
+export const TimeModal = forwardRef(
+  (props: TimeModalProps, ref: SlidingSheetRef) => {
     const snapPoints = ['50%']
     const newValue = useRef<Date>(props.value)
 

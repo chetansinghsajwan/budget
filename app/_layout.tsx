@@ -3,7 +3,7 @@ import { View } from '@components/ui/View'
 import { ThemeProvider } from '@components/Theme'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
 
-export const RootLayout = () => {
+export const RootView = () => {
   return (
     <GestureHandlerRootView>
       <ThemeProvider>
@@ -22,4 +22,4 @@ export const RootLayout = () => {
   )
 }
 
-export default RootLayout
+export default RootView

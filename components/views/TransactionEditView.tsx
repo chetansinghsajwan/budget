@@ -1,21 +1,21 @@
 import { View } from '@components/ui/View'
 import { PageTitle } from '@components/ui/PageTitle'
-import { RadioCard } from '@components/ui/RadioCard'
-import { CurrencyCard } from '@components/ui/CurrencyCard'
-import { TimeCard } from '@components/ui/TimeCard'
+import { RadioCard } from '@components/cards/RadioCard'
+import { CurrencyCard } from '@components/cards/CurrencyCard'
+import { TimeCard } from '@components/cards/TimeCard'
 import { Button } from '@components/ui/Button'
 import { Transaction, TransactionType } from '@services/Transaction'
 import { useSlidingSheet } from '@components/ui/SlidingSheet'
-import { TimePicker } from '@components/ui/TimePicker'
+import { TimeModal } from '@components/modals/TimeModal'
 
-export interface TransactionLayoutProps {
+export interface TransactionViewProps {
   value: Transaction
   onChange?: (value: Transaction) => void
 }
 
-export const TransactionEditLayout = (props: TransactionLayoutProps) => {
+export const TransactionEditView = (props: TransactionViewProps) => {
   const transaction = props.value
-  const datetimePicker = useSlidingSheet()
+  const timeModal = useSlidingSheet()
 
   const onClose = () => {}
 
@@ -63,7 +63,7 @@ export const TransactionEditLayout = (props: TransactionLayoutProps) => {
   const onCurrencyCardPress = () => {}
 
   const onTimeCardPress = () => {
-    datetimePicker.current?.expand()
+    timeModal.current?.expand()
   }
 
   return (
@@ -122,8 +122,8 @@ export const TransactionEditLayout = (props: TransactionLayoutProps) => {
         {/* Location */}
         {/* <LocationCard value={transaction.location} /> */}
       </View>
-      <TimePicker
-        ref={datetimePicker}
+      <TimeModal
+        ref={timeModal}
         value={transaction.time}
         onChange={onTimeChange}
       />

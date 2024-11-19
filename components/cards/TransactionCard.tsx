@@ -1,18 +1,18 @@
 import { Transaction } from '@services/Transaction'
-import { Card } from '@components/ui/Card'
+import { Card, CardProps } from '@components/ui/Card'
 import { View } from '@components/ui/View'
 import { Text } from '@components/ui/Text'
 
-export interface TransactionProps {
+export interface TransactionCardProps extends CardProps {
   transaction: Transaction
 }
 
-export const TransactionCard = (props: TransactionProps) => {
+export const TransactionCard = (props: TransactionCardProps) => {
   const transaction = props.transaction
   const transactionSign = transaction.type === 'credit' ? '+' : '-'
 
   return (
-    <Card>
+    <Card {...props.cardProps}>
       <View
         style={{
           padding: 20,

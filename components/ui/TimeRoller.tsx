@@ -39,10 +39,10 @@ const getTimeNames = (props: {
   fullNames?: boolean
   lowercase?: boolean
 }): string[] => {
-  if (props.fullNames && props.lowercase) return datetimeNames
-  if (props.fullNames && !props.lowercase) return datetimeNamesUppercase
-  if (!props.fullNames && props.lowercase) return datetimeShortNames
-  if (!props.fullNames && !props.lowercase) return datetimeShortNamesUppercase
+  if (props.fullNames && props.lowercase) return monthNames
+  if (props.fullNames && !props.lowercase) return monthNamesUppercase
+  if (!props.fullNames && props.lowercase) return monthShortNames
+  if (!props.fullNames && !props.lowercase) return monthShortNamesUppercase
 
   return []
 }
@@ -76,7 +76,7 @@ export const TimeRoller = (props: TimeRollerProps) => {
   const showMinute = props.showMinute ?? defaults.showMinute
   const showSecond = props.showSecond ?? defaults.showSecond
 
-  const datetimeNames = getTimeNames({
+  const monthNames = getTimeNames({
     fullNames: props.useMonthFullNames,
     lowercase: props.useMonthLowerCaseNames,
   })
@@ -138,7 +138,7 @@ export const TimeRoller = (props: TimeRollerProps) => {
         <Roller
           title='Month'
           index={month}
-          items={datetimeNames}
+          items={monthNames}
           onChange={onMonthChange}
           {...props.monthProps}
         />
@@ -187,7 +187,7 @@ export const TimeRoller = (props: TimeRollerProps) => {
   )
 }
 
-const datetimeNames = [
+const monthNames = [
   'january',
   'february',
   'march',
@@ -202,7 +202,7 @@ const datetimeNames = [
   'december',
 ]
 
-const datetimeShortNames = [
+const monthShortNames = [
   'jan',
   'feb',
   'mar',
@@ -217,10 +217,10 @@ const datetimeShortNames = [
   'dec',
 ]
 
-const datetimeNamesUppercase = datetimeShortNames.map(name =>
+const monthNamesUppercase = monthShortNames.map(name =>
   name.toUpperCase(),
 )
 
-const datetimeShortNamesUppercase = datetimeShortNames.map(name =>
+const monthShortNamesUppercase = monthShortNames.map(name =>
   name.toUpperCase(),
 )
