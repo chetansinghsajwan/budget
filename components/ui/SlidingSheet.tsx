@@ -20,12 +20,13 @@ export const SlidingSheet = React.forwardRef(
     const theme = useTheme()
     const defaultSnapPoints = ['50%', '90%']
     const snapPoints = props.snapPoints ?? defaultSnapPoints
+    const initialSnapIndex = props.initialSnapIndex ?? -1
 
     return (
       <BottomSheet
         ref={ref}
         snapPoints={snapPoints}
-        index={props.initialSnapIndex}
+        index={initialSnapIndex}
         enablePanDownToClose
         onClose={props.onClose}
         handleStyle={{
