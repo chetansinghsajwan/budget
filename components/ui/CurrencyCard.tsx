@@ -1,7 +1,5 @@
 import React from 'react'
 import { Card, CardProps } from '@components/ui/Card'
-import { Icon } from '@components/ui/Icon'
-import { View } from '@components/ui/View'
 import { useTheme } from '@components/Theme'
 import { TextInput } from 'react-native'
 
@@ -12,6 +10,7 @@ export type CurrencyCardProps = CardProps & {
   type?: CurrencyType
   onChange?: (value: number) => void
   editable?: boolean
+  onPress?: () => void
 }
 
 export const CurrencyCard = (props: CurrencyCardProps) => {
@@ -29,7 +28,7 @@ export const CurrencyCard = (props: CurrencyCardProps) => {
   }
 
   return (
-    <Card icon='currency-rupee'>
+    <Card icon='currency-rupee' onPress={props.onPress}>
       <TextInput
         value={getValueString()}
         onChangeText={onValueChange}

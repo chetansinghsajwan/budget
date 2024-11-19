@@ -1,9 +1,10 @@
 import { useTheme } from '@components/Theme'
-import { View, ViewProps } from '@components/ui/View'
+import { View } from '@components/ui/View'
 import { Icon, IconName } from '@components/ui/Icon'
 import { ReactNode } from 'react'
+import { Pressable, PressableProps } from 'react-native'
 
-export type CardProps = ViewProps & {
+export type CardProps = PressableProps & {
   icon?: IconName
 }
 
@@ -43,7 +44,7 @@ export const Card = (props: CardProps) => {
   }
 
   return (
-    <View
+    <Pressable
       style={{
         borderRadius: 20,
         backgroundColor: theme.cardColor,
@@ -53,6 +54,6 @@ export const Card = (props: CardProps) => {
       {...props}
     >
       <RenderWithIcon iconName={props.icon} children={props.children} />
-    </View>
+    </Pressable>
   )
 }

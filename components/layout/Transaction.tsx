@@ -6,6 +6,8 @@ import { CurrencyCard } from '@components/ui/CurrencyCard'
 import { DatetimeCard } from '@components/ui/DatetimeCard'
 import { Button } from '@components/ui/Button'
 import { Transaction, TransactionType } from '@services/Transaction'
+import { useSlidingSheet } from '@components/ui/SlidingSheet'
+import { DatetimePicker } from '@components/ui/DatetimePicker'
 
 export interface TransactionLayoutProps {
   value: Transaction
@@ -22,6 +24,7 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
   const transaction = props.value
   const editable = props.editable ?? false
   const edit = props.edit ?? false
+  const datetimePicker = useSlidingSheet()
   const [isEditMode, setIsEditMode] = useState(edit)
 
   const onTitleChange = (value: string) => {
@@ -73,6 +76,17 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
 
   const onSave = () => {
     setIsEditMode(false)
+  }
+
+  const onCurrencyCardPress = () => {}
+
+  const onDatetimeCardPress = () => {
+    if (!isEditMode) return
+
+    datetimePicker.current?.expand()
+  }
+
+  const onDatetimeChange = (value: Date) => {
   }
 
   const NormalModeTopBar = () => {
@@ -127,9 +141,9 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
         editable={isEditMode}
       />
 
-      {/* Contents */}
+      {/* Content */}
       <View
-        id='contents'
+        id='content'
         style={{
           gap: 10,
           padding: 20,
@@ -149,16 +163,16 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
         {/* Amount */}
         <CurrencyCard
           value={transaction.amount}
-          onChange={onAmountChange}
-          editable={isEditMode}
+          onPress={onCurrencyCardPress}
         />
 
         {/* Time */}
-        <DatetimeCard value={transaction.time} />
+        <DatetimeCard value={transaction.time} onPress={onDatetimeCardPress} />
 
         {/* Location */}
         {/* <LocationCard value={transaction.location} /> */}
       </View>
+      <DatetimePicker ref={datetimePicker} value={transaction.time} onChange={onDatetimeChange} />
     </View>
   )
 }
