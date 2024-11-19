@@ -1,123 +1,26 @@
-import { useState } from 'react'
 import { View } from '@components/ui/View'
 import { PageTitle } from '@components/ui/PageTitle'
 import { RadioCard } from '@components/ui/RadioCard'
 import { CurrencyCard } from '@components/ui/CurrencyCard'
 import { TimeCard } from '@components/ui/TimeCard'
 import { Button } from '@components/ui/Button'
-import { Transaction, TransactionType } from '@services/Transaction'
-import { useSlidingSheet } from '@components/ui/SlidingSheet'
-import { TimePicker } from '@components/ui/TimePicker'
+import { Transaction } from '@services/Transaction'
 
 export interface TransactionLayoutProps {
   value: Transaction
-  onChange?: (value: Transaction) => void
+  canEdit?: boolean
+}
 
-  /// can edit values
-  editable?: boolean
-
-  /// start as edit mode
-  edit?: boolean
+const defaults = {
+  canEdit: true,
 }
 
 export const TransactionLayout = (props: TransactionLayoutProps) => {
   const transaction = props.value
-  const editable = props.editable ?? false
-  const edit = props.edit ?? false
-  const datetimePicker = useSlidingSheet()
-  const [isEditMode, setIsEditMode] = useState(edit)
+  const canEdit = props.canEdit ?? defaults.canEdit
 
-  const onTitleChange = (value: string) => {
-    if (!props.onChange) return
-
-    const newTransaction = {
-      ...transaction,
-      title: value,
-    }
-
-    props.onChange(newTransaction)
-  }
-
-  const onTypeChange = (value: string) => {
-    if (!props.onChange) return
-    if (value !== 'credit' && value !== 'debit') return
-    const type: TransactionType = value as TransactionType
-
-    const newTransaction = {
-      ...transaction,
-      type: type,
-    }
-
-    props.onChange(newTransaction)
-  }
-
-  const onAmountChange = (value: number) => {
-    if (!props.onChange) return
-
-    const newTransaction = {
-      ...transaction,
-      amount: value,
-    }
-
-    props.onChange(newTransaction)
-  }
-
-  const onClose = () => {
-    setIsEditMode(false)
-  }
-
-  const onEdit = () => {
-    setIsEditMode(true)
-  }
-
-  const onCancel = () => {
-    setIsEditMode(false)
-  }
-
-  const onSave = () => {
-    setIsEditMode(false)
-  }
-
-  const onCurrencyCardPress = () => {}
-
-  const onTimeCardPress = () => {
-    if (!isEditMode) return
-
-    datetimePicker.current?.expand()
-  }
-
-  const onTimeChange = (value: Date) => {
-  }
-
-  const NormalModeTopBar = () => {
-    if (!editable) return <View />
-
-    return (
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Button icon='back' onPress={onClose} />
-        <Button icon='edit' onPress={onEdit} />
-      </View>
-    )
-  }
-
-  const EditModeTopBar = () => {
-    return (
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-        }}
-      >
-        <Button icon='cross' onPress={onCancel} />
-        <Button icon='check' onPress={onSave} />
-      </View>
-    )
-  }
+  const onClose = () => {}
+  const onEdit = () => {}
 
   return (
     <View>
@@ -125,21 +28,19 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
       <View
         id='top-bar'
         style={{
-          height: 70,
+          height: 100,
           width: '100%',
           padding: 20,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
         }}
       >
-        {isEditMode ? <EditModeTopBar /> : <NormalModeTopBar />}
+        <Button icon='back' onPress={onClose} />
+        {canEdit && <Button icon='edit' onPress={onEdit} />}
       </View>
 
       {/* Title */}
-      <PageTitle
-        value={transaction.title}
-        placeholder='Title'
-        onChange={onTitleChange}
-        editable={isEditMode}
-      />
+      <PageTitle value={transaction.title} />
 
       {/* Content */}
       <View
@@ -152,27 +53,18 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
         {/* Type */}
         <RadioCard
           value={transaction.type}
-          onChange={onTypeChange}
           items={[
             { id: 'credit', label: 'Credit' },
             { id: 'debit', label: 'Debit' },
           ]}
-          editable={isEditMode}
         />
 
         {/* Amount */}
-        <CurrencyCard
-          value={transaction.amount}
-          onPress={onCurrencyCardPress}
-        />
+        <CurrencyCard value={transaction.amount} />
 
         {/* Time */}
-        <TimeCard value={transaction.time} onPress={onTimeCardPress} />
-
-        {/* Location */}
-        {/* <LocationCard value={transaction.location} /> */}
+        <TimeCard value={transaction.time} />
       </View>
-      <TimePicker ref={datetimePicker} value={transaction.time} onChange={onTimeChange} />
     </View>
   )
 }

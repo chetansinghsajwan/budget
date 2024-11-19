@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Transaction } from '@services/Transaction'
 import { FlatList, GestureResponderEvent, Pressable } from 'react-native'
-import { TransactionCard } from '@components/layout/TransactionCard'
-import { client } from '@services/Client'
 import { View } from '@components/ui/View'
 import { Button } from '@components/ui/Button'
 import { useTheme } from '@components/Theme'
 import { TransactionLayout } from '@components/layout/Transaction'
+import { TransactionCard } from '@components/layout/TransactionCard'
+import { TransactionEditLayout } from '@components/layout/TransactionEdit'
 import { PageTitle } from '@components/ui/PageTitle'
 import {
   SlidingSheet,
@@ -14,10 +13,13 @@ import {
   useSlidingSheet,
 } from '@components/ui/SlidingSheet'
 import { SearchBar } from '@components/ui/SearchBar'
+import { client } from '@services/Client'
+import { Transaction } from '@services/Transaction'
 
 export const TransactionsPage = () => {
   const theme = useTheme()
-  const sheetRef = useSlidingSheet()
+  const transactionSheet = useSlidingSheet()
+  const transactionEditSheet = useSlidingSheet()
   const sheetSnapPoints = ['50%', '90%']
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [transaction, setTransaction] = useState<Transaction>()
@@ -50,12 +52,12 @@ export const TransactionsPage = () => {
     }
 
     setTransaction(emptyTransaction)
-    sheetRef.current?.expand()
+    transactionSheet.current?.expand()
   }
 
   const onCardPress = (transaction: Transaction) => {
     setTransaction(transaction)
-    sheetRef.current?.expand()
+    transactionSheet.current?.expand()
   }
 
   const onSheetClose = () => {
@@ -111,19 +113,29 @@ export const TransactionsPage = () => {
       />
 
       <SlidingSheet
-        ref={sheetRef}
+        ref={transactionEditSheet}
         snapPoints={sheetSnapPoints}
         initialSnapIndex={-1}
         onClose={onSheetClose}
       >
         <SlidingSheetScrollView>
           {transaction && (
-            <TransactionLayout
+            <TransactionEditLayout
               value={transaction}
               onChange={setTransaction}
-              editable
             />
           )}
+        </SlidingSheetScrollView>
+      </SlidingSheet>
+
+      <SlidingSheet
+        ref={transactionSheet}
+        snapPoints={sheetSnapPoints}
+        initialSnapIndex={-1}
+        onClose={onSheetClose}
+      >
+        <SlidingSheetScrollView>
+          {transaction && <TransactionLayout value={transaction} canEdit />}
         </SlidingSheetScrollView>
       </SlidingSheet>
     </View>
