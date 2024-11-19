@@ -3,7 +3,7 @@ import { View } from '@components/ui/View'
 import { PageTitle } from '@components/ui/PageTitle'
 import { RadioCard } from '@components/ui/RadioCard'
 import { CurrencyCard } from '@components/ui/CurrencyCard'
-import { TimeCard } from '@components/ui/TimeCard'
+import { DatetimeCard } from '@components/ui/DatetimeCard'
 import { Button } from '@components/ui/Button'
 import { Transaction, TransactionType } from '@services/Transaction'
 
@@ -154,7 +154,7 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
         />
 
         {/* Time */}
-        <TimeCard value={transaction.time} />
+        <DatetimeCard value={transaction.time} />
 
         {/* Location */}
         {/* <LocationCard value={transaction.location} /> */}
