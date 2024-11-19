@@ -2,19 +2,19 @@ import { forwardRef, useRef } from 'react'
 import { SlidingSheet, SlidingSheetRef } from '@components/ui/SlidingSheet'
 import { BottomSheetScrollView, BottomSheetView } from '@gorhom/bottom-sheet'
 import {
-  DatetimeRoller,
-  DatetimeRollerProps,
-} from '@components/ui/DatetimeRoller'
+  TimeRoller,
+  TimeRollerProps,
+} from '@components/ui/TimeRoller'
 import { Button } from '@components/ui/Button'
 
-export interface DatetimePickerProps {
+export interface TimePickerProps {
   value: Date
   onChange?: (value: Date) => void
-  rollerProps?: DatetimeRollerProps
+  rollerProps?: TimeRollerProps
 }
 
-export const DatetimePicker = forwardRef(
-  (props: DatetimePickerProps, ref: SlidingSheetRef) => {
+export const TimePicker = forwardRef(
+  (props: TimePickerProps, ref: SlidingSheetRef) => {
     const snapPoints = ['50%']
     const newValue = useRef<Date>(props.value)
 
@@ -52,7 +52,7 @@ export const DatetimePicker = forwardRef(
             alignItems: 'center',
           }}
         >
-          <DatetimeRoller {...props.rollerProps} />
+          <TimeRoller {...props.rollerProps} />
         </BottomSheetScrollView>
       </SlidingSheet>
     )

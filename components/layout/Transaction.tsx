@@ -3,11 +3,11 @@ import { View } from '@components/ui/View'
 import { PageTitle } from '@components/ui/PageTitle'
 import { RadioCard } from '@components/ui/RadioCard'
 import { CurrencyCard } from '@components/ui/CurrencyCard'
-import { DatetimeCard } from '@components/ui/DatetimeCard'
+import { TimeCard } from '@components/ui/TimeCard'
 import { Button } from '@components/ui/Button'
 import { Transaction, TransactionType } from '@services/Transaction'
 import { useSlidingSheet } from '@components/ui/SlidingSheet'
-import { DatetimePicker } from '@components/ui/DatetimePicker'
+import { TimePicker } from '@components/ui/TimePicker'
 
 export interface TransactionLayoutProps {
   value: Transaction
@@ -80,13 +80,13 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
 
   const onCurrencyCardPress = () => {}
 
-  const onDatetimeCardPress = () => {
+  const onTimeCardPress = () => {
     if (!isEditMode) return
 
     datetimePicker.current?.expand()
   }
 
-  const onDatetimeChange = (value: Date) => {
+  const onTimeChange = (value: Date) => {
   }
 
   const NormalModeTopBar = () => {
@@ -167,12 +167,12 @@ export const TransactionLayout = (props: TransactionLayoutProps) => {
         />
 
         {/* Time */}
-        <DatetimeCard value={transaction.time} onPress={onDatetimeCardPress} />
+        <TimeCard value={transaction.time} onPress={onTimeCardPress} />
 
         {/* Location */}
         {/* <LocationCard value={transaction.location} /> */}
       </View>
-      <DatetimePicker ref={datetimePicker} value={transaction.time} onChange={onDatetimeChange} />
+      <TimePicker ref={datetimePicker} value={transaction.time} onChange={onTimeChange} />
     </View>
   )
 }

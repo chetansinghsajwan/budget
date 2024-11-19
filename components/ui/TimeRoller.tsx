@@ -2,7 +2,7 @@ import { View } from '@components/ui/View'
 import { Roller, RollerProps } from '@components/ui/Roller'
 import { NumRoller } from '@components/ui/NumRoller'
 
-export interface DatetimeRollerProps {
+export interface TimeRollerProps {
   year?: number
   month?: number
   day?: number
@@ -35,7 +35,7 @@ export interface DatetimeRollerProps {
   secondProps?: RollerProps
 }
 
-const getDatetimeNames = (props: {
+const getTimeNames = (props: {
   fullNames?: boolean
   lowercase?: boolean
 }): string[] => {
@@ -47,7 +47,7 @@ const getDatetimeNames = (props: {
   return []
 }
 
-export const DatetimeRoller = (props: DatetimeRollerProps) => {
+export const TimeRoller = (props: TimeRollerProps) => {
   const defaults = {
     year: 0,
     month: 0,
@@ -76,7 +76,7 @@ export const DatetimeRoller = (props: DatetimeRollerProps) => {
   const showMinute = props.showMinute ?? defaults.showMinute
   const showSecond = props.showSecond ?? defaults.showSecond
 
-  const datetimeNames = getDatetimeNames({
+  const datetimeNames = getTimeNames({
     fullNames: props.useMonthFullNames,
     lowercase: props.useMonthLowerCaseNames,
   })

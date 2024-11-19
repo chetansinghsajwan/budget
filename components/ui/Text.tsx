@@ -9,7 +9,7 @@ export type TextFormat = 'none' | 'integer' | 'float' | 'currency' | 'datetime'
 
 export type CurrencyFormat = 'inr' | 'usd'
 
-export type DatetimeFormat = 'auto' | 'yy:MM:dd HH:mm:ss' | 'yy:MM:dd hh:mm:ss'
+export type TimeFormat = 'auto' | 'yy:MM:dd HH:mm:ss' | 'yy:MM:dd hh:mm:ss'
 
 export type TextStyle = ReactNative.TextStyle
 
@@ -18,8 +18,8 @@ export type TextProps = ReactNative.TextProps & {
   category?: TextCategory
   format?: TextFormat
   currencyFormat?: CurrencyFormat
-  datetimeFormat?: DatetimeFormat
-  relativeDatetime?: Date
+  datetimeFormat?: TimeFormat
+  relativeTime?: Date
 }
 
 export const Text = (props: TextProps) => {
@@ -96,10 +96,10 @@ const _toString = (props: TextProps): string => {
     case 'currency':
       return _formatCurrency(props.value, props.currencyFormat ?? 'inr')
     case 'datetime':
-      return _formatDatetime(
+      return _formatTime(
         props.value,
         props.datetimeFormat ?? 'auto',
-        props.relativeDatetime ?? new Date(),
+        props.relativeTime ?? new Date(),
       )
   }
 }
@@ -117,14 +117,14 @@ const _formatInteger = (value: TextValue): string => {
   return value.toString()
 }
 
-const _formatDatetime = (
+const _formatTime = (
   value: TextValue,
-  format: DatetimeFormat,
-  relativeDatetime: Date,
+  format: TimeFormat,
+  relativeTime: Date,
 ): string => {
   if (!(value instanceof Date)) return 'format error'
 
-  const diffSeconds = (relativeDatetime.getTime() - value.getTime()) / 1000
+  const diffSeconds = (relativeTime.getTime() - value.getTime()) / 1000
   const diffMinutes = Math.floor(diffSeconds / 60)
   const diffHours = Math.floor(diffSeconds / 3600)
   const diffDays = Math.floor(diffSeconds / 86400)
