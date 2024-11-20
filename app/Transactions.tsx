@@ -7,22 +7,24 @@ import { TransactionView } from '@components/views/TransactionView'
 import { TransactionCard } from '@components/cards/TransactionCard'
 import { TransactionEditView } from '@components/views/TransactionEditView'
 import { PageTitle } from '@components/ui/PageTitle'
-import {
-  SlidingSheet,
-  SlidingSheetScrollView,
-  useSlidingSheet,
-} from '@components/ui/SlidingSheet'
+import { SlidingSheet, useSlidingSheet } from '@components/ui/SlidingSheet'
 import { SearchBar } from '@components/ui/SearchBar'
 import { client } from '@services/Client'
 import { Transaction } from '@services/Transaction'
+import { Modal } from '@components/ui/Modal'
+
+const defaults = {
+  transaction: new Transaction(),
+}
 
 export const TransactionsPage = () => {
   const theme = useTheme()
   const transactionSheet = useSlidingSheet()
-  const transactionEditSheet = useSlidingSheet()
   const sheetSnapPoints = ['50%', '90%']
   const [transactions, setTransactions] = useState<Transaction[]>([])
-  const [transaction, setTransaction] = useState<Transaction>()
+  const [transaction, setTransaction] = useState<Transaction>(
+    defaults.transaction,
+  )
   const [searchString, setSearchString] = useState<string>('')
   const [filteredTransactions, setFilteredTransactions] = useState(transactions)
 
@@ -40,18 +42,7 @@ export const TransactionsPage = () => {
   }, [searchString, transactions])
 
   const onCreateTransaction = (event: GestureResponderEvent) => {
-    const emptyTransaction: Transaction = {
-      id: '2238-234-23-23-423-423',
-      type: 'credit',
-      title: '',
-      amount: 0,
-      description: '',
-      category: '',
-      time: new Date(),
-      createdAt: new Date(),
-    }
-
-    setTransaction(emptyTransaction)
+    setTransaction(defaults.transaction)
     transactionSheet.current?.expand()
   }
 
@@ -61,8 +52,10 @@ export const TransactionsPage = () => {
   }
 
   const onSheetClose = () => {
-    setTransaction(undefined)
+    setTransaction(defaults.transaction)
   }
+
+  const editMode = false
 
   return (
     <View
@@ -100,44 +93,28 @@ export const TransactionsPage = () => {
         )}
         stickyHeaderIndices={[0]}
         renderItem={item => (
-          <Pressable
+          <TransactionCard
+            transaction={item.item}
             onPress={() => onCardPress(item.item)}
             style={{
               minWidth: 400,
               maxWidth: 700,
             }}
-          >
-            <TransactionCard transaction={item.item} />
-          </Pressable>
+          />
         )}
       />
 
-      <SlidingSheet
-        ref={transactionEditSheet}
-        snapPoints={sheetSnapPoints}
-        initialSnapIndex={-1}
-        onClose={onSheetClose}
-      >
-        <SlidingSheetScrollView>
-          {transaction && (
-            <TransactionEditView
-              value={transaction}
-              onChange={setTransaction}
-            />
-          )}
-        </SlidingSheetScrollView>
-      </SlidingSheet>
-
-      <SlidingSheet
+      <Modal
         ref={transactionSheet}
-        snapPoints={sheetSnapPoints}
-        initialSnapIndex={-1}
-        onClose={onSheetClose}
+        // snapPoints={sheetSnapPoints}
+        // onClose={onSheetClose}
       >
-        <SlidingSheetScrollView>
-          {transaction && <TransactionView value={transaction} canEdit />}
-        </SlidingSheetScrollView>
-      </SlidingSheet>
+        {editMode ? (
+          <TransactionView value={transaction} canEdit />
+        ) : (
+          <TransactionEditView value={transaction} onChange={setTransaction} />
+        )}
+      </Modal>
     </View>
   )
 }

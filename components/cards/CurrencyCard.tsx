@@ -1,44 +1,19 @@
-import React from 'react'
 import { Card, CardProps } from '@components/ui/Card'
-import { useTheme } from '@components/Theme'
-import { TextInput } from 'react-native'
+import { Text } from '@components/ui/Text'
 
 export type CurrencyType = 'inr' | 'usd' | 'lkr'
 
 export type CurrencyCardProps = CardProps & {
   value: number
   type?: CurrencyType
-  onChange?: (value: number) => void
-  editable?: boolean
-  onPress?: () => void
 }
 
 export const CurrencyCard = (props: CurrencyCardProps) => {
-  const theme = useTheme()
-  const editable = props.editable ?? false
-
-  const getValueString = () => props.value.toString()
-
-  const onValueChange = (newValueString: string) => {
-    if (!props.onChange) return
-
-    newValueString = newValueString.replace(/[^0-9]/g, '')
-    const newValue = parseInt(newValueString)
-    props.onChange(newValue)
-  }
+  const valueString = props.value.toString()
 
   return (
     <Card icon='currency-rupee' onPress={props.onPress}>
-      <TextInput
-        value={getValueString()}
-        onChangeText={onValueChange}
-        editable={editable}
-        style={{
-          fontFamily: theme.h5Family,
-          fontSize: theme.h5Size,
-          color: theme.h5Color,
-        }}
-      />
+      <Text value={valueString} category='h5' />
     </Card>
   )
 }

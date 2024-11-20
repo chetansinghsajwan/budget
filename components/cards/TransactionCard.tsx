@@ -12,7 +12,7 @@ export const TransactionCard = (props: TransactionCardProps) => {
   const transactionSign = transaction.type === 'credit' ? '+' : '-'
 
   return (
-    <Card {...props.cardProps}>
+    <Card {...props}>
       <View
         style={{
           padding: 20,

@@ -13,7 +13,7 @@ export const Card = (props: CardProps) => {
 
   const RenderWithIcon = (props: {
     iconName?: IconName
-    children?: ReactNode
+    children?: ReactNode | any
   }) => {
     if (!props.iconName) return props.children
 
@@ -45,13 +45,16 @@ export const Card = (props: CardProps) => {
 
   return (
     <Pressable
-      style={{
-        borderRadius: 20,
-        backgroundColor: theme.cardColor,
-        minHeight: 80,
-        justifyContent: 'center',
-      }}
       {...props}
+      style={[
+        {
+          borderRadius: 20,
+          backgroundColor: theme.cardColor,
+          minHeight: 80,
+          justifyContent: 'center',
+        },
+        props.style,
+      ]}
     >
       <RenderWithIcon iconName={props.icon} children={props.children} />
     </Pressable>
