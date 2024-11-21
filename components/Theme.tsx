@@ -1,7 +1,7 @@
-import React from 'react'
+import { createContext, useContext } from 'react'
 import { ColorValue, useColorScheme } from 'react-native'
-import { useFonts } from 'expo-font'
-import { Poppins_400Regular } from '@expo-google-fonts/poppins'
+// import { useFonts } from 'expo-font'
+// import { Poppins_400Regular } from '@expo-google-fonts/poppins'
 
 const colors = {
   matteBlack: '#28282B',
@@ -94,7 +94,7 @@ export const darkTheme: Theme = {
   placeholderColor: 'grey',
 }
 
-export const ThemeContext = React.createContext<Theme>(lightTheme)
+export const ThemeContext = createContext<Theme>(lightTheme)
 
 export interface ThemeProviderProps {
   theme?: Theme
@@ -105,7 +105,7 @@ export const ThemeProvider = (props: ThemeProviderProps) => {
   const colorScheme = useColorScheme()
   const theme = colorScheme === 'light' ? lightTheme : darkTheme
 
-  useFonts({ Poppins_400Regular })
+  // useFonts({ Poppins_400Regular })
 
   return (
     <ThemeContext.Provider
@@ -116,5 +116,5 @@ export const ThemeProvider = (props: ThemeProviderProps) => {
 }
 
 export const useTheme = (): Theme => {
-  return React.useContext(ThemeContext)
+  return useContext(ThemeContext)
 }

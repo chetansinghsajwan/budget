@@ -1,4 +1,3 @@
-import { Slot } from 'expo-router'
 import { View } from '@components/ui/View'
 import { ThemeProvider } from '@components/Theme'
 import { GestureHandlerRootView } from 'react-native-gesture-handler'
@@ -15,7 +14,6 @@ export const RootView = () => {
             paddingTop: 50,
           }}
         >
-          <Slot />
         </View>
       </ThemeProvider>
     </GestureHandlerRootView>
