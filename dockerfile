@@ -1,4 +1,4 @@
-FROM chetansinghsajwan/tauri-builder as builder
+FROM chetansinghsajwan/tauri-builder AS builder
 
 # Build the app
 COPY . .
