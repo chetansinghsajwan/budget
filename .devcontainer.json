@@ -1,8 +1,5 @@
 {
-  "build": {
-    "dockerfile": "dockerfile",
-    "target": "devenv"
-  },
+  "image": "chetansinghsajwan/tauri-dev",
   "remoteUser": "root",
   "runArgs": [
     "--device=/dev/kvm"
