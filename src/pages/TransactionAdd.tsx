@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router'
 import { TransactionEditView } from '@components/TransactionEditView'
 import { Transaction } from '@client/Transaction'
 import { useState } from 'react'
+import { PageLayout } from '@components/PageLayout'
+import { PageFooter } from '@components/PageLayout/Footer'
 
 export function TransactionCreatePage() {
   const navigate = useNavigate()
@@ -24,7 +26,7 @@ export function TransactionCreatePage() {
     navigate(-1)
   }
 
-  function onAccept() {
+  function onSave() {
     client.addTransaction(transaction)
     navigate(-1)
   }
@@ -34,24 +36,18 @@ export function TransactionCreatePage() {
   }
 
   return (
-    <div
-      id='transaction-edit-page'
-      style={{
-        padding: 15,
-      }}
-    >
-      <div
-        id='top-bar'
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          height: 60,
-        }}
-      >
-        <Button label='Cancel' size='md' onPress={onCancel} />
-        <Button label='Accept' size='md' onPress={onAccept} />
-      </div>
-      <TransactionEditView transaction={transaction} onChange={onChange} />
-    </div>
+    <PageLayout>
+      <PageFooter
+        buttons={[
+          <Button
+            label='Cancel'
+            variant='light'
+            size='sm'
+            onPress={onCancel}
+          />,
+          <Button label='Save' variant='light' size='sm' onPress={onSave} />,
+        ]}
+      />
+    </PageLayout>
   )
 }
