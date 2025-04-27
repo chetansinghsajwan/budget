@@ -37,6 +37,8 @@ export type IconName =
   | 'home'
   | 'home-filled'
   | 'database-dollar'
+  | 'menu'
+  | 'dots-vertical'
 
 export interface IconProps {
   name?: IconName
@@ -91,6 +93,8 @@ const _tablerIconMap = {
   'arrow-right': TablerIcons.IconArrowRight,
   'arrow-up': TablerIcons.IconArrowUp,
   'arrow-down': TablerIcons.IconArrowDown,
+  'dots-vertical': TablerIcons.IconDotsVertical,
+  'menu': TablerIcons.IconDotsVertical,
   back: TablerIcons.IconArrowLeft,
   search: TablerIcons.IconSearch,
   trash: TablerIcons.IconTrashX,

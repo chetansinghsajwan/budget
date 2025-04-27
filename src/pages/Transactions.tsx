@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router'
 import { List } from '@components/List'
-import { Text } from '@components/Text'
 import { Button } from '@components/Button'
 import { Transaction } from '@client/Transaction'
 import { useClient } from '@client/ClientProvider'
 import { TransactionCard } from '@components/TransactionCard'
+import { PageLayout } from '@components/PageLayout'
+import { PageLayoutHeader } from '@components/PageLayout/Header'
+import { NavButton } from '@components/NavButton'
+import { PageLayoutBody } from '@components/PageLayout/Body'
 
 export function TransactionsPage() {
   const navigate = useNavigate()
@@ -25,8 +28,7 @@ export function TransactionsPage() {
     }
   }, [])
 
-  function onAdd() {
-    navigate('/transaction/add')
+  function showMenu() {
   }
 
   function onTransactionPress(id: string) {
@@ -50,29 +52,25 @@ export function TransactionsPage() {
   }
 
   return (
-    <>
-      <div
-        id='top-bar'
-        style={{
-          display: 'flex',
-          justifyContent: 'space-between',
-          padding: 10,
-        }}
-      >
-        <Button label='Add' onPress={onAdd} />
-      </div>
-      <div
-        id='title'
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: 400,
-        }}
-      >
-        <Text value='Transactions' category='h1' />
-      </div>
-      <List items={transactions} itemRenderer={renderTransaction} />
-    </>
+    <PageLayout>
+      <PageLayoutHeader
+        title='Transactions'
+        leftSideButtons={[
+          <NavButton icon='arrow-left' to={-1} variant='light' size='sm' />,
+        ]}
+        rightSideButtons={[
+          <NavButton
+            icon='add'
+            to='/transaction/add'
+            variant='light'
+            size='sm'
+          />,
+          <Button icon='menu' onPress={showMenu} variant='light' size='sm' />,
+        ]}
+      />
+      <PageLayoutBody>
+        <List items={transactions} itemRenderer={renderTransaction} />
+      </PageLayoutBody>
+    </PageLayout>
   )
 }
