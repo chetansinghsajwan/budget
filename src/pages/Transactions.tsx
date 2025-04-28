@@ -5,10 +5,9 @@ import { Button } from '@components/Button'
 import { Transaction } from '@client/Transaction'
 import { useClient } from '@client/ClientProvider'
 import { TransactionCard } from '@components/TransactionCard'
-import { PageLayout } from '@components/PageLayout'
-import { PageLayoutHeader } from '@components/PageLayout/Header'
+import { PageTemplate } from '@templates/Page'
 import { NavButton } from '@components/NavButton'
-import { PageLayoutBody } from '@components/PageLayout/Body'
+import { Text } from '@components/Text'
 
 export function TransactionsPage() {
   const navigate = useNavigate()
@@ -28,8 +27,7 @@ export function TransactionsPage() {
     }
   }, [])
 
-  function showMenu() {
-  }
+  function showMenu() {}
 
   function onTransactionPress(id: string) {
     navigate(`/transaction/${id}`)
@@ -52,25 +50,23 @@ export function TransactionsPage() {
   }
 
   return (
-    <PageLayout>
-      <PageLayoutHeader
-        title='Transactions'
-        leftSideButtons={[
-          <NavButton icon='arrow-left' to={-1} variant='light' size='sm' />,
-        ]}
-        rightSideButtons={[
-          <NavButton
-            icon='add'
-            to='/transaction/add'
-            variant='light'
-            size='sm'
-          />,
-          <Button icon='menu' onPress={showMenu} variant='light' size='sm' />,
-        ]}
-      />
-      <PageLayoutBody>
-        <List items={transactions} itemRenderer={renderTransaction} />
-      </PageLayoutBody>
-    </PageLayout>
+    <PageTemplate
+      title='Transactions'
+      beforeTitleButtons={[
+        <NavButton icon='arrow-left' to={-1} variant='light' size='sm' />,
+      ]}
+      afterTitleButtons={[
+        <NavButton
+          icon='add'
+          to='/transaction/add'
+          variant='light'
+          size='sm'
+        />,
+        <NavButton icon='search' to='/search' variant='light' size='sm' />,
+        <Button icon='menu' onPress={showMenu} variant='light' size='sm' />,
+      ]}
+    >
+      <List items={transactions} itemRenderer={renderTransaction} />
+    </PageTemplate>
   )
 }

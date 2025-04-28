@@ -3,9 +3,7 @@ import { useParams } from 'react-router'
 import { Button } from '@components/Button'
 import { useClient } from '@client/ClientProvider'
 import { TransactionView } from '@components/TransactionView'
-import { PageLayout } from '@components/PageLayout'
-import { PageFooter } from '@components/PageLayout/Footer'
-import { PageLayoutBody } from '@components/PageLayout/Body'
+import { PageTemplate } from '@templates/Page'
 
 export function TransactionPage() {
   const navigate = useNavigate()
@@ -16,7 +14,7 @@ export function TransactionPage() {
 
   const transaction = transactionResult
 
-  function onCancel() {
+  function onBack() {
     navigate(-1)
   }
 
@@ -25,16 +23,16 @@ export function TransactionPage() {
   }
 
   return (
-    <PageLayout>
-      <PageLayoutBody>
-        <TransactionView transaction={transaction} />
-      </PageLayoutBody>
-      <PageFooter
-        buttons={[
-          <Button label='Cancel' size='sm' onPress={onCancel} />,
-          <Button label='Save' size='sm' onPress={onEdit} />,
-        ]}
-      />
-    </PageLayout>
+    <PageTemplate
+      title='Transaction'
+      beforeTitleButtons={[
+        <Button icon='back' variant='light' size='sm' onPress={onBack} />,
+      ]}
+      afterTitleButtons={[
+        <Button icon='edit' variant='light' size='sm' onPress={onEdit} />,
+      ]}
+    >
+      <TransactionView transaction={transaction} />
+    </PageTemplate>
   )
 }
