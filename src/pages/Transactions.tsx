@@ -26,7 +26,7 @@ export function TransactionsPage() {
     }
   }, [])
 
-  function showMenu() {}
+  function showOptions() {}
 
   function onTransactionPress(id: string) {
     navigate(`/transaction/${id}`)
@@ -62,7 +62,7 @@ export function TransactionsPage() {
           size='sm'
         />,
         <NavButton icon='search' to='/search' variant='light' size='sm' />,
-        <Button icon='options' onPress={showMenu} variant='light' size='sm' />,
+        <Button icon='options' onPress={showOptions} variant='light' size='sm' />,
       ]}
     >
       <List items={transactions} itemRenderer={renderTransaction} />
