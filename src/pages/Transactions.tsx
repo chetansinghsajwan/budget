@@ -7,7 +7,6 @@ import { useClient } from '@client/ClientProvider'
 import { TransactionCard } from '@components/TransactionCard'
 import { PageTemplate } from '@templates/Page'
 import { NavButton } from '@components/NavButton'
-import { Text } from '@components/Text'
 
 export function TransactionsPage() {
   const navigate = useNavigate()
@@ -53,7 +52,7 @@ export function TransactionsPage() {
     <PageTemplate
       title='Transactions'
       beforeTitleButtons={[
-        <NavButton icon='arrow-left' to={-1} variant='light' size='sm' />,
+        <NavButton icon='back' to={-1} variant='light' size='sm' />,
       ]}
       afterTitleButtons={[
         <NavButton

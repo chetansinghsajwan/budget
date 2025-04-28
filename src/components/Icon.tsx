@@ -96,7 +96,7 @@ const _tablerIconMap = {
   'arrow-down': TablerIcons.IconArrowDown,
   'dots-vertical': TablerIcons.IconDotsVertical,
   options: TablerIcons.IconDotsVertical,
-  back: TablerIcons.IconArrowLeft,
+  back: TablerIcons.IconChevronLeft,
   search: TablerIcons.IconSearch,
   trash: TablerIcons.IconTrashX,
   notes: TablerIcons.IconNotes,
