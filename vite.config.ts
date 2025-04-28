@@ -14,6 +14,7 @@ export default {
       '@assets': path.resolve(__dirname, 'src/assets'),
       '@pages': path.resolve(__dirname, 'src/pages'),
       '@components': path.resolve(__dirname, 'src/components'),
+      '@templates': path.resolve(__dirname, 'src/templates'),
       '@themes': path.resolve(__dirname, 'src/themes'),
       '@utils': path.resolve(__dirname, 'src/utils'),
       '@client': path.resolve(__dirname, 'src/client'),
