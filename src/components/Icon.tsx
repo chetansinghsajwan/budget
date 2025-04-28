@@ -39,6 +39,7 @@ export type IconName =
   | 'database-dollar'
   | 'options'
   | 'dots-vertical'
+  | 'menu'
 
 export interface IconProps {
   name?: IconName
@@ -94,7 +95,7 @@ const _tablerIconMap = {
   'arrow-up': TablerIcons.IconArrowUp,
   'arrow-down': TablerIcons.IconArrowDown,
   'dots-vertical': TablerIcons.IconDotsVertical,
-  'options': TablerIcons.IconDotsVertical,
+  options: TablerIcons.IconDotsVertical,
   back: TablerIcons.IconArrowLeft,
   search: TablerIcons.IconSearch,
   trash: TablerIcons.IconTrashX,
@@ -110,6 +111,7 @@ const _tablerIconMap = {
   home: TablerIcons.IconHome,
   'home-filled': TablerIcons.IconHomeFilled,
   'database-dollar': TablerIcons.IconDatabaseDollar,
+  menu: TablerIcons.IconMenu2,
 }
 
 const _getTablerIcon = (name?: IconName): TablerIcons.Icon | undefined => {
