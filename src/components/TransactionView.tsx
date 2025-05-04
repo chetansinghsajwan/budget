@@ -10,6 +10,7 @@ export interface TransactionViewProps {
   transaction: Transaction
   onBack?: () => void
   onEdit?: () => void
+  onDelete?: () => void
 }
 
 export function TransactionView(props: TransactionViewProps) {
@@ -22,6 +23,7 @@ export function TransactionView(props: TransactionViewProps) {
         <Button icon='back' variant='light' size='sm' onPress={props.onBack} />,
       ]}
       afterTitleButtons={[
+        <Button icon='delete' variant='light' size='sm' onPress={props.onDelete} />,
         <Button icon='edit' variant='light' size='sm' onPress={props.onEdit} />,
       ]}
     >

@@ -21,9 +21,15 @@ export function TransactionPage() {
     navigate('/transaction/edit/' + transaction.id)
   }
 
+  async function onDelete() {
+    await client.deleteTransaction(transaction.id)
+    navigate('/transactions')
+  }
+
   return <TransactionView
     transaction={transaction}
     onBack={onBack}
     onEdit={onEdit}
+    onDelete={onDelete}
   />
 }

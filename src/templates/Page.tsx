@@ -4,8 +4,8 @@ import { Text } from '@components/Text'
 
 export interface PageTemplateProps {
   title?: string
-  beforeTitleButtons?: ReactElement<typeof Button>[]
-  afterTitleButtons?: ReactElement<typeof Button>[]
+  beforeTitleButtons?: (ReactElement<typeof Button> | undefined)[]
+  afterTitleButtons?: (ReactElement<typeof Button> | undefined)[]
   header?: ReactNode
   footer?: ReactNode
   children?: ReactNode
@@ -15,7 +15,7 @@ export interface PageTemplateProps {
 export function PageTemplate(props: PageTemplateProps) {
   const defaultHeaderSize = 220
   const headerSize = props.headerSize ?? defaultHeaderSize
-  const header = props.header ?? <Text value={props.title} category='h3' />
+  const header = props.header ?? <Text value={props.title} category='h2' />
   const headerOpacityMultiplier = 3
   const pagePadding = 15
 

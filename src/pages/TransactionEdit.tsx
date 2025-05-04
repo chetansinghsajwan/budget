@@ -27,12 +27,18 @@ export function TransactionEditPage() {
     navigate(-1)
   }
 
+  async function onDelete() {
+    await client.deleteTransaction(transaction.id)
+    navigate('/transactions')
+  }
+
   return (
     <TransactionEditView
       transaction={transaction}
       onChange={onChange}
       onBack={onBack}
       onSave={onSave}
+      onDelete={onDelete}
     />
   )
 }
