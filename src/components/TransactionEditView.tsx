@@ -16,6 +16,7 @@ export interface TransactionEditViewProps {
   availableTags?: string[]
   onBack?: () => void
   onSave?: () => void
+  onDelete?: () => void
 }
 
 export function TransactionEditView(props: TransactionEditViewProps) {
@@ -113,16 +114,18 @@ export function TransactionEditView(props: TransactionEditViewProps) {
           <TextInput
             value={transaction.title}
             onChange={onTitleChange}
-            category='h1'
+            placeholder='Title'
+            category='h2'
             align='center'
           />
         </div>
       }
       beforeTitleButtons={[
-        <Button icon='back' variant='light' size='sm' onPress={props.onBack} />,
+        props.onBack && <Button icon='back' variant='light' size='sm' onPress={props.onBack} />,
       ]}
       afterTitleButtons={[
-        <Button icon='correct' variant='light' size='sm' onPress={props.onSave} />,
+        props.onDelete && <Button icon='delete' variant='light' size='sm' onPress={props.onDelete} />,
+        props.onSave && <Button icon='correct' variant='light' size='sm' onPress={props.onSave} />,
       ]}
     >
       <div

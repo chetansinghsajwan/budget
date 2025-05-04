@@ -26,7 +26,12 @@ export function TransactionsPage() {
     }
   }, [])
 
-  function showOptions() {}
+  function showOptions() { }
+
+  function onRefresh() {
+    const transactions = client.getTransactions()
+    setTransactions(transactions)
+  }
 
   function onTransactionPress(id: string) {
     navigate(`/transaction/${id}`)
@@ -55,12 +60,8 @@ export function TransactionsPage() {
         <NavButton icon='back' to={-1} variant='light' size='sm' />,
       ]}
       afterTitleButtons={[
-        <NavButton
-          icon='add'
-          to='/transaction/add'
-          variant='light'
-          size='sm'
-        />,
+        <Button icon='refresh' onPress={onRefresh} variant='light' size='sm' />,
+        <NavButton icon='add' to='/transaction/add' variant='light' size='sm' />,
         <NavButton icon='search' to='/search' variant='light' size='sm' />,
         <Button icon='options' onPress={showOptions} variant='light' size='sm' />,
       ]}

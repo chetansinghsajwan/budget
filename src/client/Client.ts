@@ -30,6 +30,7 @@ export class Client {
   _categories: string[] = []
   _tags: string[] = []
   _transactions: Transaction[] = []
+  _saveOnWrite = true
 
   init = async () => {
     await this.loadData()
@@ -151,7 +152,9 @@ export class Client {
     }
 
     this._transactions[index] = newTransaction
-    this.saveData()
+
+    if (this._saveOnWrite)
+      this.saveData()
 
     return newTransaction
   }
@@ -163,7 +166,9 @@ export class Client {
     }
 
     this._transactions.push(transaction)
-    this.saveData()
+
+    if (this._saveOnWrite)
+      this.saveData()
 
     return transaction
   }
@@ -175,6 +180,10 @@ export class Client {
     if (index < 0) return false
 
     this._transactions.splice(index, 1)
+
+    if (this._saveOnWrite)
+      this.saveData()
+
     return true
   }
 
