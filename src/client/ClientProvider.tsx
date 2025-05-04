@@ -9,6 +9,8 @@ export interface ClientProviderProps {
 
 export function ClientProvider(props: ClientProviderProps) {
   const client = new Client()
+  client.init()
+
   return (
     <ClientContext.Provider value={client}>
       {props.children}

@@ -5,6 +5,8 @@ import { SelectListCard } from '@components/SelectListCard'
 import { CostInputCard } from '@components/CostInputCard'
 import { Transaction } from '@client/Transaction'
 import { useClient } from '@client/ClientProvider'
+import { Button } from '@components/Button'
+import { PageTemplate } from '@templates/Page'
 import constants from '@constants'
 
 export interface TransactionEditViewProps {
@@ -12,6 +14,8 @@ export interface TransactionEditViewProps {
   onChange?: (changes: Partial<Transaction>) => void
   availableCategories?: string[]
   availableTags?: string[]
+  onBack?: () => void
+  onSave?: () => void
 }
 
 export function TransactionEditView(props: TransactionEditViewProps) {
@@ -93,79 +97,90 @@ export function TransactionEditView(props: TransactionEditViewProps) {
   }
 
   return (
-    <div
-      id='content'
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: constants.transactionElementGap,
-      }}
+    <PageTemplate
+      title={transaction.title}
+      header={
+        <div
+          id='title'
+          style={{
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 250,
+          }}
+        >
+          <TextInput
+            value={transaction.title}
+            onChange={onTitleChange}
+            category='h1'
+            align='center'
+          />
+        </div>
+      }
+      beforeTitleButtons={[
+        <Button icon='back' variant='light' size='sm' onPress={props.onBack} />,
+      ]}
+      afterTitleButtons={[
+        <Button icon='correct' variant='light' size='sm' onPress={props.onSave} />,
+      ]}
     >
       <div
-        id='title'
+        id='content'
         style={{
           display: 'flex',
           flexDirection: 'column',
-          alignItems: 'center',
-          justifyContent: 'center',
-          height: 250,
+          gap: constants.transactionElementGap,
         }}
       >
-        <TextInput
-          value={transaction.title}
-          onChange={onTitleChange}
-          category='h1'
-          align='center'
+        <CostInputCard
+          key='amount'
+          variant='long-medium'
+          inputProps={{
+            value: transaction.amount.toString(),
+            onChange: onAmountChange,
+          }}
+        />
+        <DatetimeInputCard
+          key='datetime'
+          variant='long-medium'
+          inputProps={{
+            value: transaction.datetime,
+            onChange: onDatetimeChange,
+          }}
+        />
+        <SelectListCard
+          key='category'
+          variant='long-medium'
+          leftIcon='category'
+          listProps={{
+            items: availableCategories,
+            selected: selectedCategoryIndices,
+            onSelect: onCategoryChange,
+          }}
+        />
+        <SelectListCard
+          key='tags'
+          variant='long-medium'
+          leftIcon='tag'
+          listProps={{
+            items: availableTags,
+            selected: selectedTagIndices,
+            onSelect: onTagSelect,
+            onUnselect: onTagUnselect,
+          }}
+        />
+        <TextInputCard
+          key='notes'
+          variant='long-flex'
+          onClear={onNotesClear}
+          inputProps={{
+            value: transaction.notes,
+            onChange: onNotesChange,
+            category: 'text',
+          }}
         />
       </div>
-
-      <CostInputCard
-        key='amount'
-        variant='long-medium'
-        inputProps={{
-          value: transaction.amount.toString(),
-          onChange: onAmountChange,
-        }}
-      />
-      <DatetimeInputCard
-        key='datetime'
-        variant='long-medium'
-        inputProps={{
-          value: transaction.datetime,
-          onChange: onDatetimeChange,
-        }}
-      />
-      <SelectListCard
-        key='category'
-        variant='long-medium'
-        leftIcon='category'
-        listProps={{
-          items: availableCategories,
-          selected: selectedCategoryIndices,
-          onSelect: onCategoryChange,
-        }}
-      />
-      <SelectListCard
-        key='tags'
-        variant='long-medium'
-        leftIcon='tag'
-        listProps={{
-          items: availableTags,
-          selected: selectedTagIndices,
-          onSelect: onTagSelect,
-          onUnselect: onTagUnselect,
-        }}
-      />
-      <TextInputCard
-        key='notes'
-        variant='long-flex'
-        onClear={onNotesClear}
-        inputProps={{
-          value: transaction.notes,
-          onChange: onNotesChange,
-          category: 'text',
-        }}
-      />
-    </div>
+    </PageTemplate>
   )
 }
