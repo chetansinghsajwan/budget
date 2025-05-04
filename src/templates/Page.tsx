@@ -3,7 +3,7 @@ import { Button } from '@components/Button'
 import { Text } from '@components/Text'
 
 export interface PageTemplateProps {
-  title: string
+  title?: string
   beforeTitleButtons?: ReactElement<typeof Button>[]
   afterTitleButtons?: ReactElement<typeof Button>[]
   header?: ReactNode
@@ -64,7 +64,7 @@ export function PageTemplate(props: PageTemplateProps) {
               opacity: 1 - Math.pow(headerShowRatio, headerOpacityMultiplier),
             }}
           >
-            <Text value='Transactions' category='h5' />
+            <Text value={props.title} category='h5' />
           </div>
           {props.afterTitleButtons?.map(button => button)}
         </div>
@@ -79,6 +79,14 @@ export function PageTemplate(props: PageTemplateProps) {
         }}
       >
         {props.children}
+      </div>
+      <div
+        id='footer'
+        style={{
+          paddingInline: pagePadding,
+        }}
+      >
+        {props.footer}
       </div>
     </div>
   )

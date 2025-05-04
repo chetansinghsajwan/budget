@@ -31,7 +31,6 @@ export function TransactionEditPage() {
 
   return (
     <PageTemplate
-      title='Transaction Edit'
       footer={
         <>
           <Button label='Cancel' variant='light' size='sm' onPress={onCancel} />
