@@ -40,6 +40,8 @@ export type IconName =
   | 'options'
   | 'dots-vertical'
   | 'menu'
+  | 'sort'
+  | 'filter'
 
 export interface IconProps {
   name?: IconName
@@ -112,6 +114,8 @@ const _tablerIconMap = {
   'home-filled': TablerIcons.IconHomeFilled,
   'database-dollar': TablerIcons.IconDatabaseDollar,
   menu: TablerIcons.IconMenu2,
+  sort: TablerIcons.IconSortDescending,
+  filter: TablerIcons.IconFilter,
 }
 
 const _getTablerIcon = (name?: IconName): TablerIcons.Icon | undefined => {
