@@ -42,6 +42,9 @@ export type IconName =
   | 'menu'
   | 'sort'
   | 'filter'
+  | 'delete'
+  | 'reset'
+  | 'refresh'
 
 export interface IconProps {
   name?: IconName
@@ -116,6 +119,9 @@ const _tablerIconMap = {
   menu: TablerIcons.IconMenu2,
   sort: TablerIcons.IconSortDescending,
   filter: TablerIcons.IconFilter,
+  delete: TablerIcons.IconTrash,
+  reset: TablerIcons.IconRotate,
+  refresh: TablerIcons.IconRefresh,
 }
 
 const _getTablerIcon = (name?: IconName): TablerIcons.Icon | undefined => {
