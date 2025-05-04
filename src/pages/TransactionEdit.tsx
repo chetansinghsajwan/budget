@@ -1,10 +1,8 @@
-import { Button } from '@components/Button'
+import { useState } from 'react'
 import { useClient } from '@client/ClientProvider'
 import { useNavigate, useParams } from 'react-router'
 import { TransactionEditView } from '@components/TransactionEditView'
 import { Transaction } from '@client/Transaction'
-import { PageTemplate } from '@templates/Page'
-import { useState } from 'react'
 
 export function TransactionEditPage() {
   const navigate = useNavigate()
@@ -16,7 +14,11 @@ export function TransactionEditPage() {
 
   const [transaction, setTransaction] = useState(transactionResult)
 
-  function onCancel() {
+  function onChange(changes: Partial<Transaction>) {
+    return setTransaction({ ...transaction, ...changes })
+  }
+
+  function onBack() {
     navigate(-1)
   }
 
@@ -25,20 +27,12 @@ export function TransactionEditPage() {
     navigate(-1)
   }
 
-  function onChange(changes: Partial<Transaction>) {
-    return setTransaction({ ...transaction, ...changes })
-  }
-
   return (
-    <PageTemplate
-      footer={
-        <>
-          <Button label='Cancel' variant='light' size='sm' onPress={onCancel} />
-          <Button label='Save' variant='light' size='sm' onPress={onSave} />
-        </>
-      }
-    >
-      <TransactionEditView transaction={transaction} onChange={onChange} />
-    </PageTemplate>
+    <TransactionEditView
+      transaction={transaction}
+      onChange={onChange}
+      onBack={onBack}
+      onSave={onSave}
+    />
   )
 }
