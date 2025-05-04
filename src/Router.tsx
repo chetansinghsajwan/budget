@@ -19,6 +19,7 @@ import { IndexPage } from '@pages/IndexPage'
 import { TabLayout } from '@layouts/TabLayout'
 import { useTheme } from './themes'
 import constants from '@constants'
+import { SearchPage } from '@pages/Search'
 
 function animatePage(page: ReactNode) {
   const theme = useTheme()
@@ -67,6 +68,7 @@ function animatePage(page: ReactNode) {
 
 export function AnimatedRoutes() {
   const AnimatedHomePage = animatePage(<HomePage />)
+  const AnimatedSearchPage = animatePage(<SearchPage />)
   const AnimatedTransactionsPage = animatePage(<TransactionsPage />)
   const AnimatedTransactionPage = animatePage(<TransactionPage />)
   const AnimatedTransactionAddPage = animatePage(<TransactionCreatePage />)
@@ -89,6 +91,7 @@ export function AnimatedRoutes() {
             <Route path='/home' element={AnimatedHomePage} />
             <Route path='/transactions' element={AnimatedTransactionsPage} />
           </Route>
+          <Route path='/search' element={AnimatedSearchPage} />
           <Route path='/transaction/:id' element={AnimatedTransactionPage} />
           <Route
             path='/transaction/edit/:id'
